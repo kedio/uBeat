@@ -1,0 +1,23 @@
+.header-wrapper {
+    background-color: #428BCA;
+    min-height: 60px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-left {
+    width: 230px;
+    min-height: 60px;
+    padding: 14px 15px;
+    float: left;
+    border-right: 1px solid rgba(255,255,255,0.14);
+    background-color: rgba(0,0,0,0.03);
+    position: relative;
+}
+
+.header-right {
+    margin-left: 230px;
+    min-height: 60px;
+    padding: 14px 15px;
+}
