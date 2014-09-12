@@ -1,0 +1,17 @@
+.container{
+    display:table;
+    width:100%;
+    height: inherit;
+}
+
+.centered-content{
+    margin-right: auto;
+    margin-left: auto;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.inline-blocks-container{
+    font-size: 0;
+}
