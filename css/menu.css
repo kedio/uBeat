@@ -31,6 +31,54 @@ header {
     padding: 14px 15px;
 }
 
+.left-menu {
+    width: 230px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.left-menu .nav {
+    border-bottom: 1px solid #e7e7e7;
+    margin-top: 20px;
+}
+
+.left-menu .nav li {
+    margin: 0 1px 0 0;
+    font-size: 14px;
+    font-weight: 500;
+    border-top: 1px solid #e7e7e7;
+}
+.left-menu li a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    color: #555;
+    font-size: 15px;
+    transition: background-color 0.2s ease-out 0s;
+
+}
+
+.left-menu li.active a {
+    color: #fff;
+    background-color: #428bca;
+}
+.left-menu li.active i {
+    color: #fff;
+}
+.left-menu a:hover, .left-menu a:focus, .left-menu a:active {
+    background-color: #f7f7f7;
+}
+
+.left-menu a i {
+    width: 16px;
+    margin-right: 5px;
+    color: #428bca;
+    font-size: 15px;
+    top: 1px;
+    position: relative;
+    text-align: center;
+}
 .menu-top-buffer{
     width:100%;
     height:88px;
