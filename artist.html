@@ -25,20 +25,28 @@
     </div>
 
     <div class="header-right">
-
-        <div class="align-right">
-
+        <div class="search-container">
+            <input type="text" class="search" placeholder="Search">
+        </div>
+        <div class="user-menu hide-on-tablet hide-on-mobile">
+            <img src="http://executivewinners.ca/wp-content/uploads/2013/11/generic_user_male.jpg">
+            <div class="user-details"><a>John Smith</a></div>
+            <a class="logout"><i class="fa fa-sign-out"></i> <span>logout</span></a>
         </div>
     </div>
 </header>
 
 <div class="wrapper">
     <div class="left-menu">
-        <ul class="nav nav-pills nav-stacked">
+        <div class="user-menu hide-on-desktop">
+            <img src="http://executivewinners.ca/wp-content/uploads/2013/11/generic_user_male.jpg">
+            <div class="user-details">John Smith</div>
+        </div>
+        <ul class="nav">
             <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>Home</span></a></li>
-            <li class=""><a href="messages.html"><i class="fa fa-search"></i> <span>Search</span></a></li>
-            <li class=""><a href="messages.html"><i class="fa fa-music"></i> <span>Playlists</span></a></li>
-            <li class=""><a href="messages.html"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+            <li><a href="#"><i class="fa fa-search"></i> <span>Search</span></a></li>
+            <li><a href="#"><i class="fa fa-music"></i> <span>Playlists</span></a></li>
+            <li class="hide-on-desktop"><a href="#"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
         </ul>
     </div>
     <div class="main-content">
@@ -76,11 +84,6 @@
             </div>
             <h2>Albums</h2>
         </div>
-
-        <style>
-
-
-        </style>
 
         <div class="grid-container">
             <div class="grid-33 tablet-grid-50">

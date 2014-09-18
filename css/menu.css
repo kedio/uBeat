@@ -6,22 +6,16 @@ header {
     z-index: 1000;
 }
 
-.menu-color{
-    background-color: #428BCA;
-}
-
 .header-left {
-
+    position: absolute;
+    top:0;
+    left:0;
     min-height: 60px;
     border-right: 1px solid rgba(255,255,255,0.14);
     background-color: rgba(0,0,0,0.03);
-    position: relative;
-}
-
-.float-left {
-    float: left;
     width: 230px;
     padding: 14px 15px;
+    background-color: #428BCA;
 
 }
 
@@ -29,6 +23,7 @@ header {
     margin-left: 230px;
     min-height: 60px;
     padding: 14px 15px;
+    background-color: #428BCA;
 }
 
 .left-menu {
@@ -36,11 +31,14 @@ header {
     position: absolute;
     top: 0;
     left: 0;
+    margin-top: 10px;
+
 }
 
 .left-menu .nav {
     border-bottom: 1px solid #e7e7e7;
-    margin-top: 20px;
+    margin-top: 10px;
+
 }
 
 .left-menu .nav li {
@@ -66,6 +64,7 @@ header {
 .left-menu li.active i {
     color: #fff;
 }
+
 .left-menu a:hover, .left-menu a:focus, .left-menu a:active {
     background-color: #f7f7f7;
 }
@@ -79,10 +78,6 @@ header {
     position: relative;
     text-align: center;
 }
-.menu-top-buffer{
-    width:100%;
-    height:88px;
-}
 
 #left-hand-side-menu{
     display:inline-block;
@@ -94,3 +89,84 @@ header {
 .left-menu-margin{
     margin-left: 270px;
 }
+
+
+.search-container {
+    position: relative;
+    max-width: 300px;
+}
+
+.search-container .search {
+    width: 100%;
+    border: 0;
+    border-radius: 50px;
+    padding-left: 35px;
+    padding-right: 15px;
+    height: 32px;
+    font-size: 13px;
+}
+
+.search-container:before {
+    position: absolute;
+    top: 7px;
+    left: 12px;
+    font-family: 'FontAwesome';
+    content: '\f002';
+    color: #666;
+}
+.search-container .search:focus {
+    outline: 0;
+}
+
+.user-menu {
+    position: absolute;
+    top:0;
+    right:0;
+    padding-top: 7px;
+    padding-right: 15px;
+    color: #fff;
+
+}
+
+
+.user-menu img {
+    border-radius: 50%;
+    width: 45px;
+    display: inline-block;
+    vertical-align: middle;
+    border: 2px solid #5cb85c;
+    padding: 2px;
+    background-color: #eee;
+    margin-right: 5px;
+}
+
+.user-menu a {
+    color: #fff;
+    font-family: "Enriqueta", serif;
+}
+
+.user-menu a:hover {
+    text-decoration: underline;
+    color: #eee;
+    cursor: pointer;
+}
+
+.user-menu a.logout {
+    padding: 0 10px;
+}
+
+.user-menu .user-details {
+    display: inline-block;
+    font-weight: bold;
+    font-family: "Enriqueta", serif;
+
+}
+
+.left-menu .user-menu {
+    position: relative;
+    color: #262626;
+    margin-left: 15px;
+    padding-top:0;
+}
+
+
