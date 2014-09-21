@@ -1,5 +1,13 @@
-header {
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    font-family: Helvetica;
+    margin: 0;
+    padding: 0;
+}
 
+header {
     min-height: 60px;
     position: fixed;
     width: 100%;
@@ -16,7 +24,6 @@ header {
     width: 230px;
     padding: 14px 15px;
     background-color: #428BCA;
-
 }
 
 .header-right {
@@ -32,14 +39,14 @@ header {
     top: 0;
     left: 0;
     margin-top: 10px;
-
 }
 
 .left-menu .nav {
     border-bottom: 1px solid #e7e7e7;
     margin-top: 10px;
-
+    max-width: 230px;
 }
+
 
 .left-menu .nav li {
     margin: 0 1px 0 0;
@@ -54,8 +61,70 @@ header {
     color: #555;
     font-size: 15px;
     transition: background-color 0.2s ease-out 0s;
-
 }
+
+
+@media screen and (max-width: 1024px){
+    .left-menu  {
+        width: 150px;
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .left-menu .nav {
+        width: 130px;
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .header-left  {
+        width: 100px;
+        z-index: 1000;
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .header-right  {
+        margin-left: 100px;
+    }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .left-menu{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .left-menu {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 1024px){
+    .main-content .section-header  {
+        margin-left: 0px;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .main-content  {
+        margin-left: 0px;
+
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .wrapper:before  {
+        width: 0px;
+        margin-left: 0px;
+    }
+}
+
 
 .left-menu li.active a {
     color: #fff;
@@ -79,6 +148,12 @@ header {
     text-align: center;
 }
 
+.section-container .information-container{
+    position: absolute;
+    bottom: 0;
+    left: 410px;
+}
+
 #left-hand-side-menu{
     display:inline-block;
     min-height: 600px;
@@ -89,7 +164,6 @@ header {
 .left-menu-margin{
     margin-left: 270px;
 }
-
 
 .search-container {
     position: relative;
@@ -125,7 +199,6 @@ header {
     padding-top: 7px;
     padding-right: 15px;
     color: #fff;
-
 }
 
 
@@ -168,5 +241,3 @@ header {
     margin-left: 15px;
     padding-top:0;
 }
-
-
