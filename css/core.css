@@ -90,8 +90,12 @@ a {
 }
 
 .image-container {
-    margin: 0px 10px 0px 10px;
+    margin: 0 5px;
     display: inline-block;
+}
+
+.image-container img{
+    width: 100%;
 }
 
 .image-list ul li {
