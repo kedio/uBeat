@@ -22,8 +22,9 @@ header {
     border-right: 1px solid rgba(255,255,255,0.14);
     background-color: rgba(0,0,0,0.03);
     width: 230px;
-    padding: 14px 15px;
+    padding: 16px 15px;
     background-color: #428BCA;
+    transition: width ease-out 0.5s;
 }
 
 .header-right {
@@ -31,6 +32,7 @@ header {
     min-height: 60px;
     padding: 14px 15px;
     background-color: #428BCA;
+    transition: margin-left ease-out 0.5s;
 }
 
 .left-menu {
@@ -39,6 +41,7 @@ header {
     top: 0;
     left: 0;
     margin-top: 10px;
+    transition: margin-left ease-out 0.5s;
 }
 
 .left-menu .nav {
@@ -63,68 +66,49 @@ header {
     transition: background-color 0.2s ease-out 0s;
 }
 
+.menu-button {
+    color: #fff;
+}
 
 @media screen and (max-width: 1024px){
+    .main-content{
+        position: absolute;
+        width:100%;
+        margin-left: 0;
+    }
+
+    .main-content .section-header  {
+        margin-left: 0;
+    }
+
     .left-menu  {
-        width: 150px;
-        overflow-x: hidden;
+        margin-left: -230px;
     }
-}
 
-@media screen and (max-width: 1024px) {
-    .left-menu .nav {
-        width: 130px;
-        overflow-x: hidden;
-    }
-}
-
-@media screen and (max-width: 1024px){
     .header-left  {
         width: 100px;
         z-index: 1000;
         overflow-x: hidden;
     }
-}
 
-@media screen and (max-width: 1024px){
     .header-right  {
         margin-left: 100px;
     }
-}
 
-@media screen and (max-width: 1024px) and (min-width: 768px) {
-    .left-menu{
-        display: none;
+    .wrapper.menu-visible .main-content {
+        left: 230px;
     }
-}
 
-@media screen and (max-width: 767px) {
-    .left-menu {
-        display: none;
+    .wrapper.menu-visible .left-menu {
+        margin-left: 0;
     }
-}
 
-
-@media screen and (max-width: 1024px){
-    .main-content .section-header  {
-        margin-left: 0px;
+    .wrapper:not(.menu-visible):before  {
+        width: 0;
+        margin-left: 0;
     }
+
 }
-
-@media screen and (max-width: 1024px){
-    .main-content  {
-        margin-left: 0px;
-
-    }
-}
-
-@media screen and (max-width: 1024px){
-    .wrapper:before  {
-        width: 0px;
-        margin-left: 0px;
-    }
-}
-
 
 .left-menu li.active a {
     color: #fff;
@@ -148,17 +132,10 @@ header {
     text-align: center;
 }
 
-.section-container .information-container{
+.section-container .information-container {
     position: absolute;
     bottom: 0;
     left: 410px;
-}
-
-#left-hand-side-menu{
-    display:inline-block;
-    min-height: 600px;
-    border-right: 1px solid rgba(255,255,255,0.14);
-    background-color: rgba(0,0,0,0.03);
 }
 
 .left-menu-margin{
