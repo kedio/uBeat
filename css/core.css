@@ -39,6 +39,11 @@ a {
     text-decoration: none;
 }
 
+ul {
+    color: #2f2f2f;
+    font-family: Georgia, serif;
+}
+
 .text-strong {
     font-weight: bold;
 }
@@ -64,29 +69,19 @@ a {
     text-align: center;
 }
 
-.inline-blocks-container{
-    font-size: 0;
-}
-
-.section-title {
-    color: white;
-    font-size: 40px;
-    margin: 10px 10px 10px 0px;
-    background-color: #428BCA;
-}
-
-.section-title h3 {
-    margin: 10px;
-}
-
 .section-container {
     position: relative;
     margin: 10px;
 }
 
 .information-container {
+    width: 100%;
     margin: 0px 10px 0px 10px;
     display: inline-block;
+}
+
+.information-container ul{
+    display:inline-block;
 }
 
 .image-container {
@@ -140,29 +135,31 @@ a {
 }
 
 table {
-
-    font-size: 12px;
+    color:#428BCA;
+    font-family: Georgia, serif;
+    font-size: 14px;
     background: #fff;
-    margin: 45px;
-    width: 480px;
+    margin: 0 5px 15px 5px;
+    width: 100%;
     border-collapse: collapse;
     text-align: left;
 }
 
 table th {
+    font-family: "Enriqueta", serif;
     font-size: 14px;
-    font-weight: normal;
-    color: #039;
+    font-weight: bold;
+    color: #428BCA;
     padding: 10px 8px;
-    border-bottom: 2px solid #6678b1;
+    border-bottom: 2px solid #428BCA;
 }
 
 table td {
-    border-bottom: 1px solid #ccc;
-    color: #669;
+    border-bottom: 1px solid #E7E7E7;
+    color: #262626;
     padding: 6px 8px;
 }
 
 table tbody tr:hover td {
-    color: #009;
+    color: #428BCA;
 }
