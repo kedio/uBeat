@@ -148,12 +148,6 @@ header {
     text-align: center;
 }
 
-.section-container .information-container{
-    position: absolute;
-    bottom: 0;
-    left: 410px;
-}
-
 #left-hand-side-menu{
     display:inline-block;
     min-height: 600px;
