@@ -82,7 +82,25 @@ ul {
 }
 
 .information-container ul{
-    display:inline-block;
+    display: inline-block;
+}
+
+.information-entry-type {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.section-container .information-container{
+    position: absolute;
+    bottom: 0;
+    left: 410px;
+}
+
+@media screen and (max-width: 767px){
+     .section-container .information-container {
+        position: inherit;
+        left: 0;
+    }
 }
 
 .image-container {
