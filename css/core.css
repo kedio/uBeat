@@ -39,6 +39,10 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    cursor: pointer;
+}
+
 ul {
     color: #2f2f2f;
     font-family: Georgia, serif;
@@ -59,7 +63,7 @@ ul {
 
 .main-content {
     margin-left: 230px;
-    transition: margin-left ease-out 0.5s;
+    transition: left ease-out 0.5s;
 }
 
 .centered-content{
@@ -77,39 +81,29 @@ ul {
 
 .information-container {
     width: 100%;
-    margin: 0px 10px 0px 10px;
-    display: inline-block;
+    margin: 0 5px 5px 0;
 }
 
-.information-container ul{
-    display: inline-block;
+.information-container ul {
+    margin: 5px;
 }
 
-.information-entry-type {
+.information-container ul li {
     font-weight: bold;
-    margin-right: 5px;
 }
 
-.section-container .information-container{
-    position: absolute;
-    bottom: 0;
-    left: 410px;
-}
-
-@media screen and (max-width: 767px){
-     .section-container .information-container {
-        position: inherit;
-        left: 0;
-    }
+.information-container ul li span {
+    font-weight: normal;
 }
 
 .image-container {
     margin: 0 5px;
-    display: inline-block;
 }
 
 .image-container img{
     width: 100%;
+    max-width: 600px;
+    margin-bottom: 5px;
 }
 
 .image-list ul li {
@@ -137,6 +131,14 @@ ul {
 .section-header h2 {
     display: inline-block;
     vertical-align: top;
+}
+
+.section-header.small {
+    padding: 10px 13px;
+}
+
+.section-header.small h2{
+    font-size: 24px;
 }
 
 .wrapper {

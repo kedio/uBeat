@@ -25,6 +25,16 @@ header {
     padding: 16px 15px;
     background-color: #428BCA;
     transition: width ease-out 0.5s;
+    background-image: url("../img/ubeat-logo-small.png");
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    background-size: 200px 40px;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .header-left {
+        background-image: url("../img/ubeat-logo.png");
+    }
 }
 
 .header-right {
@@ -89,6 +99,7 @@ header {
         width: 100px;
         z-index: 1000;
         overflow-x: hidden;
+        background-image: none;
     }
 
     .header-right  {

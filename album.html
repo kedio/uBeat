@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link href='http://fonts.googleapis.com/css?family=Enriqueta:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/reset.css">
@@ -12,15 +13,8 @@
 <body>
 <header class="menu-color">
     <div class="header-left float-left">
-        <!--
-        <a href="index.html" class="logo">
-            <img src="http://placehold.it/200x40" alt="">
-        </a>
-        -->
         <div class="align-right">
-            <a href="" class="menu-collapse">
-                <a class="menu-button"><i class="fa fa-bars"></i> <span>Menu</span></a>
-            </a>
+            <a id="menu-button" class="menu-button hide-on-desktop"><i class="fa fa-bars"></i> <span>Menu</span></a>
         </div>
     </div>
 
@@ -43,7 +37,7 @@
             <div class="user-details">John Smith</div>
         </div>
         <ul class="nav">
-            <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li class="active"><a href="#"><i class="fa fa-home"></i> <span>Home</span></a></li>
             <li><a href="#"><i class="fa fa-search"></i> <span>Search</span></a></li>
             <li><a href="#"><i class="fa fa-music"></i> <span>Playlists</span></a></li>
             <li class="hide-on-desktop"><a href="#"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
@@ -64,11 +58,11 @@
                         <img src="http://a2.mzstatic.com/us/r30/Music/17/07/36/mzi.ldnorbao.400x400-75.jpg"/>
                     </div>
                     <ul>
-                        <li>Title: Abbey Road</li>
-                        <li>Artist: The Beatles </li>
-                        <li>Genre: Rock</li>
-                        <li>Release date: Sep 26, 1969</li>
-                        <li> 17 tracks</li>
+                        <li>Title: <span>Abbey Road</span></li>
+                        <li>Artist: <span>The Beatles</span></li>
+                        <li>Genre: <span>Rock</span></li>
+                        <li>Release date: <span>Sep 26, 1969</span></li>
+                        <li><span>17 tracks</span></li>
                     </ul>
                     <a href="https://itunes.apple.com/ca/artist/the-beatles/id136975"
                        target="itunes_store"
@@ -204,5 +198,7 @@
 
     </div>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/menu.js"></script>
 </body>
 </html>
