@@ -1,0 +1,42 @@
+<div class="section-header">
+    <div class="icon">
+        <i class="fa fa-group"></i>
+    </div>
+    <h2>Artist: The Beatles</h2>
+</div>
+
+<div class="grid-container">
+    <div class="grid-33">
+        <div class="image-container">
+            <img src="http://a2.mzstatic.com/us/r30/Music/17/07/36/mzi.ldnorbao.400x400-75.jpg"/>
+        </div>
+        <div class="information-container">
+            <ul>
+                <li>Name: <span class="text-normal">The Beatles</span></li>
+                <li>Genre: <span class="text-normal">Rock</span></li>
+            </ul>
+            <a href="https://itunes.apple.com/ca/artist/the-beatles/id136975"
+               target="itunes_store"
+               style="display:inline-block;
+                       overflow:hidden;
+                       background:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_itunes-lrg.png) no-repeat;
+                       width:110px;
+                       height:40px;
+                       @media only screen{background-image:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_itunes-lrg.svg);}"></a>
+        </div>
+    </div>
+    <div class="grid-66">
+        <div class="section-header small">
+            <h2>Related Albums</h2>
+        </div>
+        <div class="grid-50 tablet-grid-50" ng-repeat="album in relatedAlbums">
+            <div class="album-panel">
+                <div class="album-image"><img ng-src="{{album.artworkUrl}}"/></div>
+                <div class="album-description">
+                    <p class="text-strong">{{album.title}}</p>
+                    <p class="artist">by <span class="text-emphasis">{{album.artist}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
