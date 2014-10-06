@@ -1,0 +1,10 @@
+{
+  "name": "ubeat-team5",
+  "version": "1.0.0",
+  "description": "team5 ubeat",
+  "author": "",
+  "private": true,
+  "dependencies": {
+    "express": "^4.9.5"
+  }
+}
