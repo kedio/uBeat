@@ -10,32 +10,12 @@ artistModule.config(function($stateProvider) {
 
 
 artistModule.controller('artistController', function($scope, $state, APIService) {
-    /*APIService.getArtist('wer').success(function(data) {
-     $scope.relatedAlbums = data.albums
-     });
-     */
     $scope.relatedAlbums = [];
+    APIService.getArtist(136975).success(function(data, status, headers, config){
+        $scope.artist = data.results[0];
 
-    $scope.relatedAlbums = [
-        {
-            title: "1",
-            artist: "The Beatles",
-            artworkUrl: "http://a1.mzstatic.com/us/r30/Features/85/fe/95/dj.kfrgxzbp.100x100-75.jpg"
-        },
-        {
-            title: "1",
-            artist: "The Beatles",
-            artworkUrl: "http://a1.mzstatic.com/us/r30/Features/85/fe/95/dj.kfrgxzbp.100x100-75.jpg"
-        },
-        {
-            title: "1",
-            artist: "The Beatles",
-            artworkUrl: "http://a1.mzstatic.com/us/r30/Features/85/fe/95/dj.kfrgxzbp.100x100-75.jpg"
-        }
-    ];
-
-
-
-
-
+        APIService.getAlbumsForArtist($scope.artist.artistName).success(function(data, status, headers, config){
+            $scope.relatedAlbums = data.results;
+        })
+    })
 });

@@ -2,7 +2,7 @@
     <div class="icon">
         <i class="fa fa-group"></i>
     </div>
-    <h2>Artist: The Beatles</h2>
+    <h2>Artist: {{artist.artistName}}</h2>
 </div>
 
 <div class="grid-container">
@@ -12,8 +12,8 @@
         </div>
         <div class="information-container">
             <ul>
-                <li>Name: <span class="text-normal">The Beatles</span></li>
-                <li>Genre: <span class="text-normal">Rock</span></li>
+                <li>Name: <span class="text-normal">{{artist.artistName}}</span></li>
+                <li>Genre: <span class="text-normal">{{artist.primaryGenreName}}</span></li>
             </ul>
             <a href="https://itunes.apple.com/ca/artist/the-beatles/id136975"
                target="itunes_store"
@@ -31,10 +31,10 @@
         </div>
         <div class="grid-50 tablet-grid-50" ng-repeat="album in relatedAlbums">
             <div class="album-panel">
-                <div class="album-image"><img ng-src="{{album.artworkUrl}}"/></div>
+                <div class="album-image"><img ng-src="{{album.artworkUrl100}}"/></div>
                 <div class="album-description">
-                    <p class="text-strong">{{album.title}}</p>
-                    <p class="artist">by <span class="text-emphasis">{{album.artist}}</span></p>
+                    <p class="text-strong">{{album.collectionName}}</p>
+                    <p class="artist">by <span class="text-emphasis">{{album.artistName}}</span></p>
                 </div>
             </div>
         </div>
