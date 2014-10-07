@@ -22,19 +22,9 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
     APIService.getAlbumsTracks($stateParams.albumId).success(function(data, status, headers, config){
         data.results.splice(0,1);
         for(var i = 0; i < data.results.length; i++){
-            data.results[i].formatedTime = formatTime(data.results[i].trackTimeMillis);
+            data.results[i].time = new Time(data.results[i].trackTimeMillis);
         }
         $scope.tracks = data.results;
     })
 });
 
-function formatTime(timeInMillis){
-    var timeInSecond = Math.round(timeInMillis/1000);
-    var formatedTime = Math.floor(timeInSecond / 60) + ": " + pad(timeInSecond % 60,2);
-    return formatedTime;
-}
-
-function pad (str, max) {
-    str = str.toString();
-    return str.length < max ? pad("0" + str, max) : str;
-}

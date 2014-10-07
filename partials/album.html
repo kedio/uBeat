@@ -43,7 +43,7 @@
             <tr ng-repeat="track in tracks">
                 <td>{{track.trackNumber}}</td>
                 <td>{{track.trackName}}</td>
-                <td>{{track.formatedTime}}</td>
+                <td>{{track.time.format()}}</td>
                 <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
             </tr>
             </tbody>
