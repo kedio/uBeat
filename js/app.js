@@ -1,4 +1,4 @@
-var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist']);
+var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist','album']);
 
 ubeatcore.controller('mainController', function($scope, $state) {
     $scope.state = $state;
@@ -11,9 +11,9 @@ ubeatcore.config(function($stateProvider, $urlRouterProvider, $locationProvider)
         requireBase: false
     });
 
-    $stateProvider.state('album', {
+    /*$stateProvider.state('album', {
         url: "/album",
         templateUrl: "/partials/album.html"
-    });
+    });*/
 });
 

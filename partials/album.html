@@ -2,23 +2,23 @@
     <div class="icon">
         <i class="fa fa-music"></i>
     </div>
-    <h2>Album: Abbey Road</h2>
+    <h2>Album: {{album.collectionName}}</h2>
 </div>
 
 <div class="grid-container">
     <div class="grid-33">
         <div class="information-container">
             <div class="image-container">
-                <img src="http://a2.mzstatic.com/us/r30/Music/17/07/36/mzi.ldnorbao.400x400-75.jpg"/>
+                <img ng-src="{{album.artworkUrl100}}"/>
             </div>
             <ul>
-                <li>Title: <span>Abbey Road</span></li>
-                <li>Artist: <span>The Beatles</span></li>
-                <li>Genre: <span>Rock</span></li>
-                <li>Release date: <span>Sep 26, 1969</span></li>
-                <li><span>17 tracks</span></li>
+                <li>Title: <span>{{album.collectionName}}</span></li>
+                <li>Artist: <span>{{album.artistName}}</span></li>
+                <li>Genre: <span>{{album.primaryGenreName}}</span></li>
+                <li>Release date: <span>{{album.releaseDate}}</span></li>
+                <li><span>{{album.trackCount}} tracks</span></li>
             </ul>
-            <a href="https://itunes.apple.com/ca/artist/the-beatles/id136975"
+            <a href="{{album.collectionViewUrl}}"
                target="itunes_store"
                style="display:inline-block;
                        overflow:hidden;
@@ -40,109 +40,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Come Together</td>
-                <td>4:18</td>
+            <tr ng-repeat="track in tracks">
+                <td>{{track.trackNumber}}</td>
+                <td>{{track.trackName}}</td>
+                <td>{{track.formatedTime}}</td>
                 <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Something</td>
-                <td>3:02</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Maxwell's Silver Hammer</td>
-                <td>3:27</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Oh! Darling</td>
-                <td>3:27</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Octopus's Garden</td>
-                <td>2:50</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>I Want You (She's So Heavy)'s Garden</td>
-                <td>7:47</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>Here Comes the Sun</td>
-                <td>3:05</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>Because</td>
-                <td>2:45</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>You Never Give Me Your Money</td>
-                <td>4:02</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>Sun King</td>
-                <td>2:26</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>11</td>
-                <td>Mean Mr. Mustard</td>
-                <td>1:06</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>12</td>
-                <td>Polythene Pam</td>
-                <td>1:12</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>13</td>
-                <td>She Came In Through the Bathroom</td>
-                <td>1:58</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>14</td>
-                <td>Golden Slumbers</td>
-                <td>1:31</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>15</td>
-                <td>Carry That Weight</td>
-                <td>1:36</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>16</td>
-                <td>The End</td>
-                <td>2:21</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-            <tr>
-                <td>17</td>
-                <td>Her Majesty</td>
-                <td>0:23</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
-            </tr>
-
             </tbody>
         </table>
     </div>

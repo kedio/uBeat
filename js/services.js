@@ -7,8 +7,16 @@ services.factory('APIService', function($http) {
             return $http.get('http://localhost:3000/artists/' + id);
         },
 
+        getAlbum:function(id){
+            return $http.get('http://localhost:3000/albums/'+id);
+        },
+
         getAlbumsForArtist: function(artistName){
             return $http.get('http://localhost:3000/search/albums?q='+ artistName);
+        },
+
+        getAlbumsTracks: function(albumId){
+            return $http.get('http://localhost:3000/albums/'+albumId+'/tracks');
         }
     }
 });
