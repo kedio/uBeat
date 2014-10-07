@@ -3,29 +3,29 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link href='http://fonts.googleapis.com/css?family=Enriqueta:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/core.css">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/artist.css">
-    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/core.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/artist.css">
+    <link rel="stylesheet" href="/css/grid.css">
 </head>
 <body ng-controller="mainController">
-<div ng-include="'partials/main-menu.html'"></div>
+<div ng-include="'/partials/main-menu.html'"></div>
 
 <div class="wrapper">
-    <div ng-include="'partials/left-menu.html'"></div>
+    <div ng-include="'/partials/left-menu.html'"></div>
     <div class="main-content">
 
         <ui-view></ui-view>
     </div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/ui-router/release/angular-ui-router.js"></script>
-<script src="js/app.js"></script>
-<script src="js/modules/artist.js"></script>
-<script src="js/services.js"></script>
-<script src="js/menu.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/ui-router/release/angular-ui-router.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/modules/artist.js"></script>
+<script src="/js/services.js"></script>
+<script src="/js/menu.js"></script>
 </body>
 </html>

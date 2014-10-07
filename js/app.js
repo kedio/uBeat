@@ -13,7 +13,7 @@ ubeatcore.config(function($stateProvider, $urlRouterProvider, $locationProvider)
 
     $stateProvider.state('album', {
         url: "/album",
-        templateUrl: "partials/album.html"
+        templateUrl: "/partials/album.html"
     });
 });
 
