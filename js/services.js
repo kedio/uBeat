@@ -27,3 +27,68 @@ services.factory('APIService', function($http) {
         }
     }
 });
+
+services.service('AuthenticationService', function($cookieStore, $rootScope) {
+    var auth = {
+        isAuthenticated: false,
+        user: $cookieStore.get('user') || {}
+    };
+    $rootScope.user = auth.user;
+
+    this.isAuthenticated = function()  {
+        return auth.isAuthenticated;
+    };
+
+    this.setAuthenticated = function(value) {
+        auth.isAuthenticated = value;
+    };
+
+    this.getUser = function() {
+        return auth.user;
+    };
+
+    this.setUser = function(user) {
+        $cookieStore.put('user', user);
+        $rootScope.user = user;
+        auth.user = user;
+    };
+
+    this.getToken = function() {
+        return auth.user.token;
+    };
+
+
+});
+
+services.factory('TokenInterceptor', function ($q, $window, $state, AuthenticationService) {
+    return {
+        // Add token to outgoing request
+        request: function (config) {
+            config.headers = config.headers || {};
+            if (AuthenticationService.getToken()) {
+                config.headers.Authorization = AuthenticationService.getToken();
+            }
+            return config;
+        },
+        requestError: function(rejection) {
+            return $q.reject(rejection);
+        },
+        // Set AuthenticationService.isAuthenticated to true if 200 received
+        response: function (response) {
+            if (response != null && response.status == 200 && AuthenticationService.getToken() && !AuthenticationService.isAuthenticated()) {
+                AuthenticationService.setAuthenticated(true);
+            }
+            return response || $q.when(response);
+        },
+        // Revoke authentication if 401 is received */
+        responseError: function(rejection) {
+            if (rejection != null && rejection.status === 401 && (AuthenticationService.getToken() || AuthenticationService.isAuthenticated())) {
+                AuthenticationService.setAuthenticated(false);
+                $state.go('public.login');
+            }
+
+            return $q.reject(rejection);
+        }
+    };
+});
+
