@@ -1,4 +1,4 @@
-var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist','album']);
+var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist', 'album']);
 
 ubeatcore.controller('mainController', function($scope, $state) {
     $scope.state = $state;
@@ -31,7 +31,7 @@ ubeatcore.config(function ($locationProvider, $httpProvider, $stateProvider) {
 
 ubeatcore.run(function($rootScope, $state, AuthenticationService) {
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-        if (toState.data.accessLimited) {
+        if (toState.data.authentificationRequired) {
             console.log('access denied');
             $rootScope.error = "Access denied";
             event.preventDefault();

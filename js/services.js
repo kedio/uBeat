@@ -1,4 +1,4 @@
-var services = angular.module('services', []);
+var services = angular.module('services', ['ngCookies']);
 var api = {
     base: "http://localhost:3000"
 };
@@ -10,7 +10,7 @@ services.factory('APIService', function($http) {
         },
 
         getAlbum:function(id){
-            return $http.get(api.base + '/albums/'+id);
+            return $http.get(api.base + '/albums/' + id);
         },
 
         getAlbumsForArtist: function(artistName){
@@ -22,7 +22,7 @@ services.factory('APIService', function($http) {
         },
 
         getAlbumsTracks: function(albumId){
-            return $http.get(api.base + '/albums/'+albumId+'/tracks');
+            return $http.get(api.base + '/albums/' + albumId + '/tracks');
         },
 
         login: function(email, password) {
