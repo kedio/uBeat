@@ -24,7 +24,16 @@ services.factory('APIService', function($http) {
 
         getAlbumsTracks: function(albumId){
             return $http.get(api.base + '/albums/'+albumId+'/tracks');
+        },
+
+        login: function(email, password) {
+            return $http.post(api.base + '/login', {email: email, password: password});
+        },
+
+        logout: function() {
+            return $http.get(api.base + '/logout');
         }
+
     }
 });
 
