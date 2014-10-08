@@ -1,11 +1,11 @@
-var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist', 'album']);
+var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist', 'album', 'user']);
 
 ubeatcore.controller('mainController', function($scope, $state) {
     $scope.state = $state;
 });
 
 
-ubeatcore.config(function ($locationProvider, $httpProvider, $stateProvider) {
+ubeatcore.config(function ($locationProvider, $urlRouterProvider,  $httpProvider, $stateProvider) {
     $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
@@ -15,30 +15,36 @@ ubeatcore.config(function ($locationProvider, $httpProvider, $stateProvider) {
 
     $stateProvider.state('public', {
         abstract: true,
-        templateUrl: '<ui-view></ui-view>',
+        template: '<ui-view></ui-view>',
         data: {
             authentificationRequired: false
         }
     });
-    $stateProvider.state('user', {
+    $stateProvider.state('private', {
         abstract: true,
-        templateUrl: '<ui-view></ui-view>',
+        templateUrl: '/partials/private.html',
         data: {
             authentificationRequired: true
         }
     });
+    $stateProvider.state('private.home', {
+        url: '/home',
+        templateUrl: '/partials/private.home.html'
+    });
+
+    $urlRouterProvider.otherwise('/login');
 });
 
 ubeatcore.run(function($rootScope, $state, AuthenticationService) {
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-        if (toState.data.authentificationRequired) {
+        if (toState.data.authentificationRequired && !AuthenticationService.getToken()) {
             console.log('access denied');
             $rootScope.error = "Access denied";
             event.preventDefault();
 
             if(fromState.url === '^') {
                 if(AuthenticationService.isAuthenticated())
-                    $state.go('user.home');
+                    $state.go('private.home');
                 else {
                     $rootScope.error = null;
                     $state.go('public.login');

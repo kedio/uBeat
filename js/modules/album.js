@@ -1,12 +1,9 @@
-/**
- * Created by dominique on 06/10/14.
- */
 var artistModule = angular.module('album', ['ui.router', 'services']);
 
 artistModule.config(function($stateProvider) {
-    $stateProvider.state('album', {
+    $stateProvider.state('private.album', {
         url: "/album/:albumId",
-        templateUrl: "/partials/album.html",
+        templateUrl: "/partials/private.album.html",
         controller: 'albumController'
     });
 });

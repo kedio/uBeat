@@ -1,9 +1,9 @@
 var artistModule = angular.module('artist', ['ui.router', 'services']);
 
 artistModule.config(function($stateProvider) {
-    $stateProvider.state('public.artist', {
+    $stateProvider.state('private.artist', {
         url: "/artist/:artistId",
-        templateUrl: "/partials/artist.html",
+        templateUrl: "/partials/private.artist.html",
         controller: 'artistController'
     });
 });
