@@ -68,7 +68,7 @@ services.service('AuthenticationService', function($cookieStore, $rootScope) {
 
 });
 
-services.factory('TokenInterceptor', function ($q, $window, $state, AuthenticationService) {
+services.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService) {
     return {
         // Add token to outgoing request
         request: function (config) {
@@ -92,7 +92,7 @@ services.factory('TokenInterceptor', function ($q, $window, $state, Authenticati
         responseError: function(rejection) {
             if (rejection != null && rejection.status === 401 && (AuthenticationService.getToken() || AuthenticationService.isAuthenticated())) {
                 AuthenticationService.setAuthenticated(false);
-                $state.go('public.login');
+                $location.path('/login');
             }
 
             return $q.reject(rejection);
