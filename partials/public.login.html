@@ -1,0 +1,21 @@
+<div class="grid-container">
+    <div class="grid-50">
+        <div class="login-panel">
+            <h4>Sign in to your account</h4>
+            <label ng-show="error">{{error}}</label>
+            <form>
+                <div>
+                    <i class="fa fa-envelope-square"></i>
+                    <input type="text" class="form-control" placeholder="Email" ng-model="email">
+                </div>
+                <div>
+                    <i class="fa fa-lock"></i>
+                    <input type="password" class="form-control" placeholder="Password" ng-model="password">
+                </div>
+
+                    <button ng-click="login(email, password)">login <i class="fa fa-angle-right"></i></button>
+            </form>
+
+        </div>
+    </div>
+</div>
