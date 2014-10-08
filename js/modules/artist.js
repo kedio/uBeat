@@ -1,7 +1,7 @@
 var artistModule = angular.module('artist', ['ui.router', 'services']);
 
 artistModule.config(function($stateProvider) {
-    $stateProvider.state('artist', {
+    $stateProvider.state('public.artist', {
         url: "/artist/:artistId",
         templateUrl: "/partials/artist.html",
         controller: 'artistController'
@@ -16,6 +16,6 @@ artistModule.controller('artistController', function($scope, $state,$stateParams
 
         APIService.getAlbumsForArtist($scope.artist.artistName).success(function(data, status, headers, config){
             $scope.relatedAlbums = data.results;
-        })
-    })
+        });
+    });
 });

@@ -17,7 +17,7 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
     APIService.getAlbum($stateParams.albumId).success(function(data, status, headers, config){
         $scope.album = data.results[0];
         $scope.album.releaseDate = $scope.album.releaseDate.substr(0, 10);
-    })
+    });
 
     APIService.getAlbumsTracks($stateParams.albumId).success(function(data, status, headers, config){
         data.results.splice(0,1);
