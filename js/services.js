@@ -1,6 +1,7 @@
 var services = angular.module('services', ['ngCookies']);
 var api = {
     base: "http://localhost:3000"
+//    base: "https://ubeat.herokuapp.com"
 };
 
 services.factory('APIService', function($http) {
@@ -23,6 +24,10 @@ services.factory('APIService', function($http) {
 
         getAlbumsTracks: function(albumId){
             return $http.get(api.base + '/albums/' + albumId + '/tracks');
+        },
+
+        getPlaylists: function(){
+            return $http.get(api.base + '/playlists')
         },
 
         login: function(email, password) {
