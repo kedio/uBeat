@@ -1,4 +1,4 @@
-var artistModule = angular.module('album', ['ui.router', 'services']);
+var artistModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap']);
 
 artistModule.config(function($stateProvider) {
     $stateProvider.state('private.album', {
@@ -6,10 +6,18 @@ artistModule.config(function($stateProvider) {
         templateUrl: "/partials/private.album.html",
         controller: 'albumController'
     });
+    $stateProvider.state("private.album.addToPlaylist", {
+        url: "/addToPlaylist",
+        onEnter: function($stateParams, $state, $modal) {
+            $modal.open({
+                templateUrl: "/partials/private.album.addToPlaylist.html"
+            });
+        }
+    });
 });
 
 
-artistModule.controller('albumController', function($scope, $state, $stateParams, APIService) {
+artistModule.controller('albumController', function($scope, $state, $stateParams, APIService, $modal) {
     $scope.tracks = [];
     APIService.getAlbum($stateParams.albumId).success(function(data, status, headers, config){
         $scope.album = data.results[0];
@@ -22,6 +30,10 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
             data.results[i].time = new Time(data.results[i].trackTimeMillis);
         }
         $scope.tracks = data.results;
-    })
+    });
+
+    $scope.showModal = function() {
+        $state.go('private.album.addToPlaylist');
+    }
 });
 

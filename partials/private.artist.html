@@ -33,8 +33,8 @@
             <div class="album-panel">
                 <div class="album-image"><img ng-src="{{album.artworkUrl100}}"/></div>
                 <div class="album-description">
-                    <p class="text-strong">{{album.collectionName}}</p>
-                    <p class="artist">by <span class="text-emphasis">{{album.artistName}}</span></p>
+                    <p class="text-strong"><a ui-sref="private.album({albumId: album.collectionId})">{{album.collectionName}}</a></p>
+                    <p class="artist">by <a class="text-emphasis" ui-sref="private.artist({artistId: album.artistId})">{{album.artistName}}</a></p>
                 </div>
             </div>
         </div>
