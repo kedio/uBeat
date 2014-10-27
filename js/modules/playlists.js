@@ -23,16 +23,20 @@ playlistsModule.controller('playlistsController', function($scope, $state, $stat
 });
 
 playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService){
-   APIService.getPlaylistDetails($stateParams.playlistId).success(function(data, status, headers, config){
-       for(var i = 0; i < data.tracks.length; i++){
-           data.tracks[i].time = new Time(data.tracks[i].trackTimeMillis);
-       }
+    function updateTrackList(){
+        APIService.getPlaylistDetails($stateParams.playlistId).success(function(data, status, headers, config){
+            for(var i = 0; i < data.tracks.length; i++){
+                data.tracks[i].time = new Time(data.tracks[i].trackTimeMillis);
+            }
+            $scope.playlist = data;
+        });
+    }
+   updateTrackList();
 
-        $scope.playlist = data;
-    });
-
-    $scope.deleteTrack = function(){
-
+    $scope.deleteTrack = function(playlistTrackId){
+        APIService.deleteTrackFromPlayList($stateParams.playlistId, playlistTrackId).success(function() {
+            updateTrackList();
+        });
     }
 });
 

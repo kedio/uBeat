@@ -17,6 +17,7 @@
                 <th>Artist</th>
                 <th>length</th>
                 <th> </th>
+                <th> </th>
             </tr>
             </thead>
             <tbody>
@@ -25,6 +26,7 @@
                 <td>{{track.artistName}}</td>
                 <td>{{track.time.format()}}</td>
                 <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
+                <td><i class="fa fa-remove" ng-click="deleteTrack(track._id)"></i> <span class='hide-on-mobile'>remove</span> </td>
             </tr>
             </tbody>
         </table>

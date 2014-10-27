@@ -34,6 +34,10 @@ services.factory('APIService', function($http) {
             return $http.get(api.base + '/playlists/' + playlistId);
         },
 
+        deleteTrackFromPlayList:function(playlistId, playlistTrackId){
+            return $http.delete(api.base + '/playlists/' + playlistId + '/tracks/' + playlistTrackId);
+        },
+
         login: function(email, password) {
             return $http.post(api.base + '/login', {email: email, password: password});
         },
