@@ -30,6 +30,10 @@ services.factory('APIService', function($http) {
             return $http.get(api.base + '/playlists')
         },
 
+        getPlaylistDetails:function(playlistId){
+            return $http.get(api.base + '/playlists/' + playlistId);
+        },
+
         login: function(email, password) {
             return $http.post(api.base + '/login', {email: email, password: password});
         },

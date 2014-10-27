@@ -1,0 +1,32 @@
+<div class="section-header">
+    <div class="icon">
+        <i class="fa fa-music"></i>
+    </div>
+    <h2>Playlist: {{playlist.name}}</h2>
+</div>
+
+<div class="grid-container">
+    <div class="grid-33">
+
+    </div>
+    <div class="grid-66">
+        <table>
+            <thead>
+            <tr>
+                <th width="100px">Name</th>
+                <th>Artist</th>
+                <th>length</th>
+                <th> </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="track in playlist.tracks">
+                <td>{{track.trackName}}</td>
+                <td>{{track.artistName}}</td>
+                <td>{{track.time.format()}}</td>
+                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
