@@ -30,7 +30,7 @@
             <h2>Related Albums</h2>
         </div>
         <div class="grid-50 tablet-grid-50" ng-repeat="album in relatedAlbums">
-            <div class="album-panel">
+            <div class="panel">
                 <div class="album-image"><img ng-src="{{album.artworkUrl100}}"/></div>
                 <div class="album-description">
                     <p class="text-strong"><a ui-sref="private.album({albumId: album.collectionId})">{{album.collectionName}}</a></p>

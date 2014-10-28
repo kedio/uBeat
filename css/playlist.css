@@ -1,0 +1,35 @@
+.panel .playlist-image {
+    vertical-align: top;
+}
+
+.panel .playlist-description {
+    position:absolute;
+    top:0;
+    margin-left: 100px;
+    padding: 10px 15px;
+}
+
+.playlist-image img {
+    border-top-left-radius:3px 3px;
+    border-bottom-left-radius:3px 3px;
+}
+
+.playlist-description a {
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 2;
+}
+
+.playlist-description p {
+    margin-bottom: 5px;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.panel .playlist-actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px 15px;
+    font-size: 15px;
+}

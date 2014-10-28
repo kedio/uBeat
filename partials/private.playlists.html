@@ -1,16 +1,21 @@
-<div id="playlist" class="row" ng-repeat="playlist in playlists">
-    <div class="col-md-4 playlist" data-playlist-id="{{playlist.id}}">
-        <div class="panel-heading">
-            <h3 class="panel-title"><a href="/playlists/{{playlist.id}}">{{playlist.name}}</a></h3>
-            <div class="btn-group pull-right">
-                <i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span>
-            </div>
+<div class="section-header">
+    <div class="icon">
+        <i class="fa fa-list"></i>
+    </div>
+    <h2>Playlists</h2>
+</div>
+
+<div class="grid-50 tablet-grid-50" ng-repeat="playlist in playlists">
+    <div class="panel" data-playlist-id="{{playlist.id}}">
+        <div class="playlist-image"><img ng-src="{{playlist.tracks[0].artworkUrl100}}"/></div>
+        <div class="playlist-description">
+            <a href="/playlists/{{playlist.id}}">{{playlist.name}}</a>
+            <p>Author: <span class="text-emphasis">{{playlist.owner.name}}</span></p>
+            <p>Number of tracks: <span class="text-emphasis">{{playlist.tracks.length}}</span></p>
         </div>
-        <div class="panel-body">
-            <ul>
-                <li>Author: {{playlist.owner.name}}</li>
-                <li>Number of tracks: {{playlist.tracks.length}}</li>
-            </ul>
+        <div class="playlist-actions btn-group pull-right">
+            <i class="fa fa-play-circle-o"></i>
+            <i class="fa fa-remove"></i>
         </div>
     </div>
 </div>
