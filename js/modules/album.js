@@ -10,7 +10,8 @@ artistModule.config(function($stateProvider) {
         url: "/addToPlaylist",
         onEnter: function($stateParams, $state, $modal) {
             $modal.open({
-                templateUrl: "/partials/private.album.addToPlaylist.html"
+                templateUrl: "/partials/private.album.addToPlaylist.html",
+                controller:"addToPlaylistController"
             });
         }
     });
@@ -25,15 +26,41 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
     });
 
     APIService.getAlbumsTracks($stateParams.albumId).success(function(data, status, headers, config){
-        data.results.splice(0,1);
         for(var i = 0; i < data.results.length; i++){
             data.results[i].time = new Time(data.results[i].trackTimeMillis);
         }
         $scope.tracks = data.results;
     });
 
-    $scope.showModal = function() {
+    $scope.addSelectedToPlaylist = function() {
+        $scope.tracksToAdd = [];
+        angular.forEach($scope.tracks, function(track) {
+            if (track.selected == true){
+                $scope.tracksToAdd = track;
+            }
+        });
         $state.go('private.album.addToPlaylist');
+    };
+
+    $scope.toggleSelection = function(selected) {
+        angular.forEach($scope.tracks, function(track) {
+            track.selected = selected;
+        });
     }
+
+});
+
+
+artistModule.controller('addToPlaylistController', function($scope, $state, APIService) {
+    $scope.playlists = [];
+
+    APIService.getPlaylists().success(function (data) {
+        console.log(data);
+        $scope.playlists = data;
+    });
+
+    //$scope.confirm = function() {
+        //$scope.selectedPlaylist =
+    //}
 });
 

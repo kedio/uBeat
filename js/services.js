@@ -14,12 +14,8 @@ services.factory('APIService', function($http) {
             return $http.get(api.base + '/albums/' + id);
         },
 
-        getAlbumsForArtist: function(artistName){
-            return $http.get(api.base + '/search/albums/', {
-                params: {
-                    q: artistName
-                }
-            });
+        getAlbumsForArtist: function(artistId){
+            return $http.get(api.base + '/artists/' + artistId + '/albums/')
         },
 
         getAlbumsTracks: function(albumId){
