@@ -14,7 +14,7 @@ artistModule.controller('artistController', function($scope, $state,$stateParams
     APIService.getArtist($stateParams.artistId).success(function(data, status, headers, config){
         $scope.artist = data.results[0];
 
-        APIService.getAlbumsForArtist($scope.artist.artistName).success(function(data, status, headers, config){
+        APIService.getAlbumsForArtist($stateParams.artistId).success(function(data, status, headers, config){
             $scope.relatedAlbums = data.results;
         });
     });
