@@ -32,8 +32,21 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
         $scope.tracks = data.results;
     });
 
-    $scope.showModal = function() {
+    $scope.addSelectedToPlaylist = function() {
+        $scope.tracksToAdd = [];
+        angular.forEach($scope.tracks, function(track) {
+            if (track.selected == true){
+                $scope.tracksToAdd = track;
+            }
+        });
         $state.go('private.album.addToPlaylist');
     }
+
+    $scope.toggleSelection = function(selected) {
+        angular.forEach($scope.tracks, function(track) {
+            track.selected = selected;
+        });
+    }
+
 });
 

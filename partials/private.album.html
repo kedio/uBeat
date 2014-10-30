@@ -36,6 +36,8 @@
                 <th width="100px">Track #</th>
                 <th>Name</th>
                 <th>length</th>
+                <th>select all:</th>
+                <th> <input type="checkbox" ng-click="toggleSelection(!allSelected); allSelected = !allSelected;"></th>
                 <th> </th>
             </tr>
             </thead>
@@ -45,9 +47,11 @@
                 <td>{{track.trackName}}</td>
                 <td>{{track.time.format()}}</td>
                 <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
+                <td><input type="checkbox" ng-model="track.selected"></td>
             </tr>
             </tbody>
         </table>
     </div>
+<button ng-click="showModal()"></button>
 <button ng-click="showModal()"></button>
 </div>
