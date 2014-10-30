@@ -56,19 +56,14 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
 playlistsModule.controller('playlistCreateController', function($scope, $rootScope, $modalInstance, APIService){
     $scope.playlist = {};
     $scope.confirm = function() {
-        console.log($scope.playlist.name);
-
-        /*APIService.createPlaylist($scope.playlistName, $rootScope.user.email).success(function() {
+        APIService.createPlaylist($scope.playlistName, $rootScope.user.email).success(function() {
             $modalInstance.close();
         }).error(function(error) {
             console.log('error while adding playlist', error);
         });
-        */
-
     };
 
     $scope.cancel = function() {
-        //$state.go('private.playlists');
         $modalInstance.dismiss();
     };
 });
