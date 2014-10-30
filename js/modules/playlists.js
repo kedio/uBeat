@@ -12,14 +12,27 @@ playlistsModule.config(function($stateProvider) {
         templateUrl: '/partials/private.playlists.details.html',
         controller: 'playlistDetailsController'
     });
+
 });
 
 
-playlistsModule.controller('playlistsController', function($scope, $state, $stateParams, APIService) {
+playlistsModule.controller('playlistsController', function($scope, $rootScope, $state, $stateParams, APIService, $modal) {
     APIService.getPlaylists().success(function (data) {
-        console.log(data);
-        $scope.playlists = data;
+        $scope.myPlaylists = data.findAll(function(playlist) {
+            if(playlist.owner) {
+                return playlist.owner.email === $rootScope.user.email;
+            }
+            return false;
+        });
+        $scope.otherPlaylists = data;
     });
+    $scope.createNewPlaylist = function() {
+        $modal.open({
+            templateUrl: "/partials/private.playlists.createNewPlaylist.html",
+            controller: 'playlistCreateController'
+        })
+    };
+
 });
 
 playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService){
@@ -39,4 +52,25 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
         });
     }
 });
+
+playlistsModule.controller('playlistCreateController', function($scope, $rootScope, $modalInstance, APIService){
+    $scope.playlist = {};
+    $scope.confirm = function() {
+        console.log($scope.playlist.name);
+
+        /*APIService.createPlaylist($scope.playlistName, $rootScope.user.email).success(function() {
+            $modalInstance.close();
+        }).error(function(error) {
+            console.log('error while adding playlist', error);
+        });
+        */
+
+    };
+
+    $scope.cancel = function() {
+        //$state.go('private.playlists');
+        $modalInstance.dismiss();
+    };
+});
+
 
