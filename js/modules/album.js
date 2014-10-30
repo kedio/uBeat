@@ -25,7 +25,6 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
     });
 
     APIService.getAlbumsTracks($stateParams.albumId).success(function(data, status, headers, config){
-        data.results.splice(0,1);
         for(var i = 0; i < data.results.length; i++){
             data.results[i].time = new Time(data.results[i].trackTimeMillis);
         }
