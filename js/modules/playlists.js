@@ -29,10 +29,21 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
     $scope.createNewPlaylist = function() {
         $modal.open({
             templateUrl: "/partials/private.playlists.createNewPlaylist.html",
-            controller: 'playlistCreateController'
+            controller: 'playlistCreateController',
+            resolve:  {
+                myPlaylists: function() {
+                    return $scope.myPlaylists ;
+                }
+            }
         })
     };
 
+    $scope.deletePlaylist = function(playlist) {
+        APIService.deletePlaylist(playlist.id).success(function() {
+            //console.log(typeof $scope.playlists)
+            //$scope.playlists = $scope.playlists.exclude(playlist);
+        });
+    }
 });
 
 playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService){
@@ -53,10 +64,12 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
     }
 });
 
-playlistsModule.controller('playlistCreateController', function($scope, $rootScope, $modalInstance, APIService){
+playlistsModule.controller('playlistCreateController', function($scope, $rootScope, $modalInstance, APIService, myPlaylists){
     $scope.playlist = {};
     $scope.confirm = function() {
-        APIService.createPlaylist($scope.playlistName, $rootScope.user.email).success(function() {
+        APIService.createPlaylist($scope.playlist.name, $rootScope.user.email).success(function(data) {
+            console.log(data);
+            myPlaylists.push(data);
             $modalInstance.close();
         }).error(function(error) {
             console.log('error while adding playlist', error);
