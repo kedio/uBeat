@@ -22,21 +22,54 @@ playlistsModule.controller('playlistsController', function($scope, $state, $stat
     });
 });
 
-playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService){
+playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService, ngAudio){
     function updateTrackList(){
         APIService.getPlaylistDetails($stateParams.playlistId).success(function(data, status, headers, config){
-            for(var i = 0; i < data.tracks.length; i++){
-                data.tracks[i].time = new Time(data.tracks[i].trackTimeMillis);
-            }
+            angular.forEach(data.tracks, function(track){
+                track.time = new Time(track.trackTimeMillis);
+                track.audioObject = ngAudio.load(track.previewUrl);
+                track.status = 'not-playing';
+            });
             $scope.playlist = data;
         });
     }
    updateTrackList();
+    $scope.currentPlayingTrack = null;
 
-    $scope.deleteTrack = function(playlistTrackId){
-        APIService.deleteTrackFromPlayList($stateParams.playlistId, playlistTrackId).success(function() {
+    $scope.deleteTrack = function(track){
+        track.audioObject.stop();
+        APIService.deleteTrackFromPlayList($stateParams.playlistId, track._id).success(function() {
             updateTrackList();
         });
+    }
+
+    $scope.playTrack = function(track){
+        if($scope.currentPlayingTrack == track){
+            if(track.status == 'not-playing'){
+                startTrack(track)
+                $scope.currentPlayingTrack = track;
+            }
+            else{
+                track.audioObject.pause();
+                track.status = 'not-playing';
+            }
+        }
+        else{
+            angular.forEach($scope.playlist.tracks, function(trackToStop){
+                if(trackToStop.status== 'playing'){
+                    trackToStop.audioObject.stop();
+                    trackToStop.status = 'not-playing';
+                }
+            })
+            startTrack(track);
+            $scope.currentPlayingTrack = track;
+        }
+
+    }
+
+    function startTrack(track){
+        track.audioObject.play();
+        track.status = 'playing';
     }
 });
 
