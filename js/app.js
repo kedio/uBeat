@@ -1,4 +1,4 @@
-var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist', 'album', 'playlists', 'user','ngAudio']);
+var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist', 'album', 'playlists', 'user']);
 
 ubeatcore.controller('mainController', function($scope, $state) {
     $scope.state = $state;

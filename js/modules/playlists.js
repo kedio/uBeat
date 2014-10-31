@@ -1,4 +1,4 @@
-var playlistsModule = angular.module('playlists', ['ui.router', 'services']);
+var playlistsModule = angular.module('playlists', ['ui.router', 'services', 'ngAudio', 'Audio']);
 
 playlistsModule.config(function($stateProvider) {
     $stateProvider.state('private.playlists', {
@@ -46,13 +46,14 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
     }
 });
 
-playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService, ngAudio){
+playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService, ngAudio, AudioService){
     function updateTrackList(){
         APIService.getPlaylistDetails($stateParams.playlistId).success(function(data, status, headers, config){
             angular.forEach(data.tracks, function(track){
                 track.time = new Time(track.trackTimeMillis);
-                track.audioObject = ngAudio.load(track.previewUrl);
-                track.status = 'not-playing';
+                AudioService.registerTrack(track);
+                //track.audioObject = ngAudio.load(track.previewUrl);
+                //track.status = 'not-playing';
             });
             $scope.playlist = data;
         });
@@ -68,32 +69,12 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
     }
 
     $scope.playTrack = function(track){
-        if($scope.currentPlayingTrack == track){
-            if(track.status == 'not-playing'){
-                startTrack(track)
-                $scope.currentPlayingTrack = track;
-            }
-            else{
-                track.audioObject.pause();
-                track.status = 'not-playing';
-            }
+        if(track.status == 'playing'){
+            AudioService.pauseTrack(track);
         }
         else{
-            angular.forEach($scope.playlist.tracks, function(trackToStop){
-                if(trackToStop.status== 'playing'){
-                    trackToStop.audioObject.stop();
-                    trackToStop.status = 'not-playing';
-                }
-            })
-            startTrack(track);
-            $scope.currentPlayingTrack = track;
+            AudioService.playTrack(track);
         }
-
-    }
-
-    function startTrack(track){
-        track.audioObject.play();
-        track.status = 'playing';
     }
 });
 
