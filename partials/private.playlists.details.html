@@ -25,7 +25,7 @@
                 <td>{{track.trackName}}</td>
                 <td>{{track.artistName}}</td>
                 <td>{{track.time.format()}}</td>
-                <td><i class="fa" ng-class="{'fa-pause' : track.status == 'playing', 'fa-play-circle-o': track.status == 'not-playing'}" ng-click="playTrack(track)"></i> <span class='hide-on-mobile'>play</span></td>
+                <td><i class="fa" ng-class="{'fa-pause' : track.status == 'playing', 'fa-play-circle-o': track.status == 'not-playing'}" ng-click="toggleTrack(track)"></i> <span class='hide-on-mobile'>play</span></td>
                 <td><i class="fa fa-remove" ng-click="deleteTrack(track)"></i> <span class='hide-on-mobile'>remove</span> </td>
             </tr>
             </tbody>
