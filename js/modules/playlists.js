@@ -69,7 +69,7 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
     }
 
     $scope.toggleTrack = function(track){
-        if(track.status == 'playing'){
+        if(track.audioObject.paused == false){
             AudioService.pauseTrack(track);
         }
         else{
