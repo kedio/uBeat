@@ -6,15 +6,6 @@ artistModule.config(function($stateProvider) {
         templateUrl: "/partials/private.album.html",
         controller: 'albumController'
     });
-    $stateProvider.state("private.album.addToPlaylist", {
-        url: "/addToPlaylist",
-        onEnter: function($stateParams, $state, $modal) {
-            $modal.open({
-                templateUrl: "/partials/private.album.addToPlaylist.html",
-                controller:"addToPlaylistController"
-            });
-        }
-    });
 });
 
 
@@ -39,7 +30,15 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
                 $scope.tracksToAdd = track;
             }
         });
-        $state.go('private.album.addToPlaylist');
+        $modal.open({
+            templateUrl: "/partials/private.album.addToPlaylist.html",
+            controller:"addToPlaylistController",
+            resolve:{
+                tracks: function() {
+                    return $scope.tracksToAdd;
+                }
+            }
+        });
     };
 
     $scope.toggleSelection = function(selected) {
@@ -51,16 +50,29 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
 });
 
 
-artistModule.controller('addToPlaylistController', function($scope, $state, APIService) {
+artistModule.controller('addToPlaylistController', function($scope, $rootScope, $modalInstance, $state, APIService, tracks) {
     $scope.playlists = [];
+    $scope.selectedPlaylist = {};
 
     APIService.getPlaylists().success(function (data) {
         console.log(data);
         $scope.playlists = data;
-    });
+    })
 
-    //$scope.confirm = function() {
-        //$scope.selectedPlaylist =
-    //}
+
+
+    $scope.confirm = function() {
+
+        console.log($scope.selectedPlaylist.id);
+       // if(!tracks.isEmpty()){
+            APIService.updatePlaylist($scope.selectedPlaylist.id.id,$scope.selectedPlaylist.id.name, tracks);
+      //  }
+
+        $modalInstance.dismiss();
+    }
+
+    $scope.cancel = function() {
+        $modalInstance.dismiss();
+    }
 });
 

@@ -38,6 +38,11 @@ services.factory('APIService', function($http) {
             return $http.post(api.base + '/login', {email: email, password: password});
         },
 
+        updatePlaylist: function(playlistId, trackList, playlistName) {
+           // return $http.post(api.base + '/login', {email: email, password: password});
+            return $http.put(api.base + '/playlists/' + playlistId, {name: playlistName, tracks: trackList});
+        },
+
         logout: function() {
             return $http.get(api.base + '/logout');
         }
