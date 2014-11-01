@@ -20,6 +20,8 @@ playlistsModule.controller('playlistsController', function($scope, $state, $stat
         console.log(data);
         $scope.playlists = data;
     });
+
+
 });
 
 playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService){
