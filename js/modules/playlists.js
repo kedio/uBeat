@@ -39,4 +39,3 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
         });
     }
 });
-

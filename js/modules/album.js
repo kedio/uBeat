@@ -47,20 +47,19 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
             track.selected = selected;
         });
     }
-
 });
 
-
-artistModule.controller('addToPlaylistController', function($scope, $state, APIService) {
+artistModule.controller('addToPlaylistController', function($scope, $state, APIService, $modalInstance, $rootScope) {
     $scope.playlists = [];
 
     APIService.getPlaylists().success(function (data) {
-        console.log(data);
         $scope.playlists = data;
     });
 
-    //$scope.confirm = function() {
-        //$scope.selectedPlaylist =
-    //}
+    $scope.confirm = function() {
+        console.log($scope.selectedPlaylist);
+    }
+    $scope.cancel = function() {
+        $modalInstance.dismiss();
+    }
 });
-
