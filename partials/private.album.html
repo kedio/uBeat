@@ -46,7 +46,7 @@
                 <td>{{track.trackNumber}}</td>
                 <td>{{track.trackName}}</td>
                 <td>{{track.time.format()}}</td>
-                <td><i class="fa fa-play-circle-o"></i> <span class='hide-on-mobile'>play</span></td>
+                <td><i class="fa" ng-class="{'fa-pause' : track.status == 'playing', 'fa-play-circle-o': track.status == 'not-playing'}" ng-click="toggleTrack(track)"></i> <span class='hide-on-mobile'>play</span></td>
                 <td><input type="checkbox" ng-model="track.selected"></td>
             </tr>
             </tbody>

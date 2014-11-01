@@ -1,4 +1,4 @@
-var artistModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap']);
+var artistModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap', 'Audio']);
 
 artistModule.config(function($stateProvider) {
     $stateProvider.state('private.album', {
@@ -18,7 +18,7 @@ artistModule.config(function($stateProvider) {
 });
 
 
-artistModule.controller('albumController', function($scope, $state, $stateParams, APIService, $modal) {
+artistModule.controller('albumController', function($scope, $state, $stateParams, APIService, $modal, AudioService) {
     $scope.tracks = [];
     APIService.getAlbum($stateParams.albumId).success(function(data, status, headers, config){
         $scope.album = data.results[0];
@@ -26,11 +26,24 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
     });
 
     APIService.getAlbumsTracks($stateParams.albumId).success(function(data, status, headers, config){
-        for(var i = 0; i < data.results.length; i++){
+        angular.forEach(data.results, function(track){
+            track.time = new Time(track.trackTimeMillis);
+            AudioService.registerTrack(track);
+        })
+        /*for(var i = 0; i < data.results.length; i++){
             data.results[i].time = new Time(data.results[i].trackTimeMillis);
-        }
+        }*/
         $scope.tracks = data.results;
     });
+
+    $scope.toggleTrack = function(track){
+        if(track.status == 'playing'){
+            AudioService.pauseTrack(track);
+        }
+        else{
+            AudioService.playTrack(track);
+        }
+    }
 
     $scope.addSelectedToPlaylist = function() {
         $scope.tracksToAdd = [];
