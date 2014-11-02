@@ -193,3 +193,7 @@ table td {
 table tbody tr:hover td {
     color: #428BCA;
 }
+
+.clickable:hover {
+    cursor: pointer;
+}
