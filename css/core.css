@@ -120,6 +120,7 @@ ul {
     box-shadow: 0 2px 3px rgba(0,0,0,0.03);
     margin-bottom: 20px;
 }
+
 .section-header .icon {
     height: 45px;
     background-color: #4e5154;
@@ -142,6 +143,10 @@ ul {
 
 .section-header.small h2{
     font-size: 24px;
+}
+
+.section-header p {
+    margin: 0;
 }
 
 .wrapper {

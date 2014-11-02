@@ -4,7 +4,6 @@
     </div>
     <h2>My playlists</h2>
     <p ng-hide="myPlaylists.length > 0">You don't have any playlist.</p>
-    <button class="button" ng-click="createNewPlaylist()">Create a new playlist</button>
 </div>
 
 <div class="grid-container">
@@ -19,6 +18,13 @@
             <div class="playlist-actions btn-group pull-right">
                 <i class="fa fa-play-circle-o"></i>
                 <i class="fa fa-times" ng-click="deletePlaylist(playlist)"></i>
+            </div>
+        </div>
+    </div>
+    <div class="grid-50 tablet-grid-50">
+        <div class="panel">
+            <div id="new-playlist-button">
+                <i class="fa fa-plus-square-o" ng-click="createNewPlaylist()"></i>
             </div>
         </div>
     </div>
