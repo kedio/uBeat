@@ -17,7 +17,7 @@
             </div>
             <div class="playlist-actions btn-group pull-right">
                 <i class="fa fa-play-circle-o clickable"></i>
-                <i class="fa fa-times clickable" ng-click="deletePlaylist(playlist)"></i>
+                <i class="fa fa-times-circle-o clickable" ng-click="deletePlaylist(playlist)"></i>
             </div>
         </div>
     </div>
@@ -30,15 +30,12 @@
     </div>
 </div>
 
-
-
 <div class="section-header">
     <div class="icon">
         <i class="fa fa-list"></i>
     </div>
     <h2>Other playlists</h2>
 </div>
-
 
 <div class="grid-container">
     <div class="grid-50 tablet-grid-50" ng-repeat="playlist in otherPlaylists">
@@ -50,7 +47,7 @@
                 <p>Number of tracks: <span class="text-emphasis">{{playlist.tracks.length}}</span></p>
             </div>
             <div class="playlist-actions btn-group pull-right">
-                <i class="fa fa-play-circle-o"></i>
+                <i class="fa fa-play-circle-o clickable"></i>
             </div>
         </div>
     </div>
