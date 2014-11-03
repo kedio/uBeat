@@ -15,8 +15,7 @@ playlistsModule.config(function($stateProvider) {
 
 });
 
-
-playlistsModule.controller('playlistsController', function($scope, $rootScope, $state, $stateParams, APIService, $modal) {
+playlistsModule.controller('playlistsController', function($scope, $rootScope, $state, $stateParams, APIService, $modal, AudioService) {
     APIService.getPlaylists().success(function (data) {
         $scope.myPlaylists = data.findAll(function(playlist) {
             if(playlist.owner) {
@@ -43,6 +42,29 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
             //console.log(typeof $scope.playlists)
             //$scope.playlists = $scope.playlists.exclude(playlist);
         });
+    }
+
+    $scope.togglePlaylist = function(playlist) {
+        if(this.isPlaylistPlaying(playlist)){
+            AudioService.stopPlaylist();
+        }
+        else{
+            if(playlist.tracks.length){
+                AudioService.playPlaylist(playlist);
+            }
+        }
+    }
+
+    $scope.isPlaylistPlaying = function(playlist){
+        var isPlaying = false;
+        angular.forEach(playlist.tracks, function(track){
+            if("audioObject" in track){
+                if(!track.audioObject.paused){
+                    isPlaying = true;
+                }
+            }
+        });
+        return isPlaying;
     }
 });
 

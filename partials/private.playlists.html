@@ -16,7 +16,7 @@
                 <p>Number of tracks: <span class="text-emphasis">{{playlist.tracks.length}}</span></p>
             </div>
             <div class="playlist-actions btn-group pull-right">
-                <i class="fa fa-play-circle-o clickable"></i>
+                <i class="fa clickable" ng-class="{'fa-stop' : isPlaylistPlaying(playlist) == true, 'fa-play-circle-o': isPlaylistPlaying(playlist) == false}" ng-click="togglePlaylist(playlist)"></i>
                 <i class="fa fa-times-circle-o clickable" ng-click="deletePlaylist(playlist)"></i>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 <p>Number of tracks: <span class="text-emphasis">{{playlist.tracks.length}}</span></p>
             </div>
             <div class="playlist-actions btn-group pull-right">
-                <i class="fa fa-play-circle-o clickable"></i>
+                <i class="fa clickable" ng-class="{'fa-stop' : isPlaylistPlaying(playlist) == true, 'fa-play-circle-o': isPlaylistPlaying(playlist) == false}" ng-click="togglePlaylist(playlist)"></i>
             </div>
         </div>
     </div>
