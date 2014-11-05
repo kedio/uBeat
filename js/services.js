@@ -122,3 +122,18 @@ services.factory('TokenInterceptor', function ($q, $window, $location, Authentic
     };
 });
 
+services.factory('CollectionService', function(){
+    return {
+        add: function(collection, item){
+            collection.push(item);
+        },
+
+        remove: function(collection, item){
+            var index = collection.indexOf(item);
+            if(index > -1){
+                collection.splice(index, 1);
+            }
+        }
+    }
+})
+

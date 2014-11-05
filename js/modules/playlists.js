@@ -15,16 +15,22 @@ playlistsModule.config(function($stateProvider) {
 
 });
 
-playlistsModule.controller('playlistsController', function($scope, $rootScope, $state, $stateParams, APIService, $modal, AudioService) {
-    APIService.getPlaylists().success(function (data) {
-        $scope.myPlaylists = data.findAll(function(playlist) {
-            if(playlist.owner) {
-                return playlist.owner.email === $rootScope.user.email;
-            }
-            return false;
+playlistsModule.controller('playlistsController', function($scope, $rootScope, $state, $stateParams, APIService,CollectionService, $modal, AudioService) {
+
+    loadingPlaylistsList = function(){
+        APIService.getPlaylists().success(function (data) {
+            $scope.myPlaylists = data.findAll(function(playlist) {
+                if(playlist.owner) {
+                    return playlist.owner.email === $rootScope.user.email;
+                }
+                return false;
+            });
+            $scope.otherPlaylists = data;
         });
-        $scope.otherPlaylists = data;
-    });
+    }
+
+    loadingPlaylistsList();
+
     $scope.createNewPlaylist = function() {
         $modal.open({
             templateUrl: "/partials/private.playlists.createNewPlaylist.html",
@@ -32,6 +38,9 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
             resolve:  {
                 myPlaylists: function() {
                     return $scope.myPlaylists ;
+                },
+                otherPlaylists: function(){
+                    return $scope.otherPlaylists;
                 }
             }
         })
@@ -39,8 +48,8 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
 
     $scope.deletePlaylist = function(playlist) {
         APIService.deletePlaylist(playlist.id).success(function() {
-            //console.log(typeof $scope.playlists)
-            //$scope.playlists = $scope.playlists.exclude(playlist);
+            CollectionService.remove($scope.myPlaylists, playlist);
+            CollectionService.remove($scope.otherPlaylists, playlist);
         });
     }
 
@@ -68,14 +77,12 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
     }
 });
 
-playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService, ngAudio, AudioService){
+playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService,CollectionService, ngAudio, AudioService){
     function updateTrackList(){
         APIService.getPlaylistDetails($stateParams.playlistId).success(function(data, status, headers, config){
             angular.forEach(data.tracks, function(track){
                 track.time = new Time(track.trackTimeMillis);
                 AudioService.registerTrack(track);
-                //track.audioObject = ngAudio.load(track.previewUrl);
-                //track.status = 'not-playing';
             });
             $scope.playlist = data;
         });
@@ -86,7 +93,7 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
     $scope.deleteTrack = function(track){
         track.audioObject.stop();
         APIService.deleteTrackFromPlayList($stateParams.playlistId, track._id).success(function() {
-            updateTrackList();
+            CollectionService.remove($scope.playlist.tracks, track);
         });
     }
 
@@ -100,12 +107,13 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
     }
 });
 
-playlistsModule.controller('playlistCreateController', function($scope, $rootScope, $modalInstance, APIService, myPlaylists){
+playlistsModule.controller('playlistCreateController', function($scope, $rootScope, $modalInstance, APIService,CollectionService, myPlaylists, otherPlaylists){
     $scope.playlist = {};
     $scope.confirm = function() {
         APIService.createPlaylist($scope.playlist.name, $rootScope.user.email).success(function(data) {
             console.log(data);
-            myPlaylists.push(data);
+            CollectionService.add(myPlaylists, data);
+            CollectionService.add(otherPlaylists, data);
             $modalInstance.close();
         }).error(function(error) {
             console.log('error while adding playlist', error);
