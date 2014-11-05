@@ -1,4 +1,4 @@
-var artistModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap']);
+var artistModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap', 'Audio']);
 
 artistModule.config(function($stateProvider) {
     $stateProvider.state('private.album', {
@@ -17,11 +17,24 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
     });
 
     APIService.getAlbumsTracks($stateParams.albumId).success(function(data, status, headers, config){
-        for(var i = 0; i < data.results.length; i++){
+        angular.forEach(data.results, function(track){
+            track.time = new Time(track.trackTimeMillis);
+            AudioService.registerTrack(track);
+        })
+        /*for(var i = 0; i < data.results.length; i++){
             data.results[i].time = new Time(data.results[i].trackTimeMillis);
-        }
+        }*/
         $scope.tracks = data.results;
     });
+
+    $scope.toggleTrack = function(track){
+        if(track.status == 'playing'){
+            AudioService.pauseTrack(track);
+        }
+        else{
+            AudioService.playTrack(track);
+        }
+    }
 
     $scope.addSelectedToPlaylist = function() {
         $scope.tracksToAdd = [];
@@ -46,7 +59,6 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
             track.selected = selected;
         });
     }
-
 });
 
 
@@ -55,9 +67,9 @@ artistModule.controller('addToPlaylistController', function($scope, $rootScope, 
     $scope.selectedPlaylist = {};
 
     APIService.getPlaylists().success(function (data) {
-        console.log(data);
         $scope.playlists = data;
     })
+
 
 
 
@@ -71,8 +83,11 @@ artistModule.controller('addToPlaylistController', function($scope, $rootScope, 
         $modalInstance.dismiss();
     }
 
+    $scope.confirm = function() {
+        console.log($scope.selectedPlaylist);
+    }
+
     $scope.cancel = function() {
         $modalInstance.dismiss();
     }
 });
-
