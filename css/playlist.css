@@ -31,5 +31,18 @@
     right: 0;
     top: 0;
     margin: 10px 15px;
-    font-size: 15px;
+    font-size: 25px;
+}
+
+#new-playlist-button {
+    display: inherit;
+    line-height: 102px;
+    text-align: center;
+}
+
+#new-playlist-button i {
+    font-size: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
 }
