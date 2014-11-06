@@ -17,7 +17,8 @@ audio.factory('AudioService', function(ngAudio, $interval){
             }
             else{
                 if(this.currentlyPlayingTrack !== null){
-                    this.stopTrack(this.currentlyPlayingTrack);
+                    //this.stopTrack(this.currentlyPlayingTrack);
+                    this.stopPlaylist();
                 }
                 track.audioObject.play();
                 this.currentlyPlayingTrack = track;
