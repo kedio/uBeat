@@ -1,7 +1,27 @@
-<h3>Home</h3>
-<p>
-    <a ui-sref="private.artist({artistId: 356545647})">Artist: Skrillex</a>
-</p>
-<p>
-    <a ui-sref="private.album({albumId: 574050396})">Album: Back In Black (AC/DC)</a>
-</p>
+<div class="section-header">
+    <div class="icon">
+        <i class="fa fa-home"></i>
+    </div>
+    <h2>Welcome to UBeat - team 5</h2>
+</div>
+
+<div class="grid-container">
+    <div class="grid-100">
+        <h3>
+            Favorite artists:
+        </h3>
+        <ul class="spaced">
+            <li><a ui-sref="private.artist({artistId: 356545647})">Skrillex</a></li>
+            <li><a ui-sref="private.artist({artistId: 520904366})">Dubstep Heroes</a></li>
+            <li><a ui-sref="private.artist({artistId: 23203991})">Arcade Fire</a></li>
+        </ul>
+
+        <h3>
+            Favorite albums:
+        </h3>
+        <ul class="spaced">
+            <li><a ui-sref="private.album({albumId: 574050396})">Back In Black (AC/DC)</a></li>
+            <li><a ui-sref="private.album({albumId: 491596645})">Bangarang</a></li>
+        </ul>
+    </div>
+</div>

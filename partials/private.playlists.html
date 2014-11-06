@@ -9,7 +9,7 @@
 <div class="grid-container">
     <div class="grid-50 tablet-grid-50" ng-repeat="playlist in myPlaylists">
         <div class="panel">
-            <div class="playlist-image"><img ng-src="{{playlist.tracks[0].artworkUrl100}}"/></div>
+            <div class="playlist-image"><a href="/playlists/{{playlist.id}}"><img ng-src="{{playlist.tracks[0].artworkUrl100}}"/></a></div>
             <div class="playlist-description">
                 <a href="/playlists/{{playlist.id}}">{{playlist.name}}</a>
                 <p>Author: <span class="text-emphasis">{{playlist.owner.name}}</span></p>
@@ -41,7 +41,7 @@
 <div class="grid-container">
     <div class="grid-50 tablet-grid-50" ng-repeat="playlist in otherPlaylists">
         <div class="panel">
-            <div class="playlist-image"><img ng-src="{{playlist.tracks[0].artworkUrl100}}"/></div>
+            <div class="playlist-image"><a href="/playlists/{{playlist.id}}"><img ng-src="{{playlist.tracks[0].artworkUrl100}}"/></a></div>
             <div class="playlist-description">
                 <a href="/playlists/{{playlist.id}}">{{playlist.name}}</a>
                 <p>Author: <span class="text-emphasis">{{playlist.owner.name}}</span></p>

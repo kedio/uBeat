@@ -14,7 +14,7 @@ h2 {
 }
 
 h3 {
-    color: #c73036;
+    color: #262626;
     font-family: "Enriqueta", serif;
     font-size: 18px;
     font-weight: bold;
@@ -49,6 +49,10 @@ a:hover {
 ul {
     color: #2f2f2f;
     font-family: Georgia, serif;
+}
+
+ul.spaced li {
+    margin-left: 10px;
 }
 
 .text-strong {

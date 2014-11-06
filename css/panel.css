@@ -11,3 +11,9 @@
     position: relative;
     box-sizing: content-box;
 }
+
+.panel a > img {
+    display: block;
+    line-height: 0;
+    font-size: 0;
+}
