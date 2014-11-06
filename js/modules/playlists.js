@@ -17,7 +17,7 @@ playlistsModule.config(function($stateProvider) {
 
 playlistsModule.controller('playlistsController', function($scope, $rootScope, $state, $stateParams, APIService,CollectionService, $modal, AudioService) {
 
-    loadingPlaylistsList = function(){
+    var loadingPlaylistsList = function(){
         APIService.getPlaylists().success(function (data) {
             $scope.myPlaylists = data.findAll(function(playlist) {
                 if(playlist.owner) {
@@ -27,7 +27,7 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
             });
             $scope.otherPlaylists = data;
         });
-    }
+    };
 
     loadingPlaylistsList();
 
@@ -41,6 +41,18 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
                 },
                 otherPlaylists: function(){
                     return $scope.otherPlaylists;
+                }
+            }
+        })
+    };
+
+    $scope.renamePlaylist = function(playlist) {
+        $modal.open({
+            templateUrl: "/partials/private.playlists.renamePlaylist.html",
+            controller: 'playlistRenameController',
+            resolve:  {
+                playlist: function() {
+                    return playlist;
                 }
             }
         })
@@ -124,5 +136,21 @@ playlistsModule.controller('playlistCreateController', function($scope, $rootSco
         $modalInstance.dismiss();
     };
 });
+
+playlistsModule.controller('playlistRenameController', function($scope, $rootScope, $modalInstance, APIService, playlist){
+    $scope.playlist = playlist;
+    $scope.confirm = function() {
+        APIService.updatePlaylist($scope.playlist.id, $scope.playlist.name, $rootScope.user.email).success(function() {
+            $modalInstance.close();
+        }).error(function(error) {
+            console.log('error while renaming playlist', error);
+        });
+    };
+
+    $scope.cancel = function() {
+        $modalInstance.dismiss();
+    };
+});
+
 
 
