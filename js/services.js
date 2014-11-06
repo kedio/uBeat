@@ -1,7 +1,7 @@
 var services = angular.module('services', ['ngCookies']);
 var api = {
-    base: "http://localhost:3000"
-    //base: "https://ubeat.herokuapp.com"
+//    base: "http://localhost:3000"
+    base: "https://ubeat.herokuapp.com"
 };
 
 services.factory('APIService', function($http) {
