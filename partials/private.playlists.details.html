@@ -5,16 +5,14 @@
     <h2>Playlist: {{playlist.name}}</h2>
 </div>
 
-<div class="grid-container">
-    <div class="grid-33">
-
-    </div>
-    <div class="grid-66">
+<div class="grid-container playlist-details">
+    <div class="grid-100">
         <table>
             <thead>
             <tr>
-                <th width="100px">Name</th>
+                <th>Name</th>
                 <th>Artist</th>
+                <th>Album</th>
                 <th>length</th>
                 <th> </th>
                 <th> </th>
@@ -23,7 +21,8 @@
             <tbody>
             <tr ng-repeat="track in playlist.tracks">
                 <td>{{track.trackName}}</td>
-                <td>{{track.artistName}}</td>
+                <td><a ui-sref="private.artist({artistId: track.artistId})">{{track.artistName}}</a></td>
+                <td><a ui-sref="private.album({albumId: track.collectionId})">{{track.collectionName}}</a></td>
                 <td>{{track.time.format()}}</td>
                 <td><i class="fa" ng-class="{'fa-pause' : track.audioObject.paused == false, 'fa-play-circle-o': track.audioObject.paused == true}" ng-click="toggleTrack(track)"></i> <span class='hide-on-mobile'>play</span></td>
                 <td><i class="fa fa-remove" ng-click="deleteTrack(track)"></i> <span class='hide-on-mobile'>remove</span> </td>

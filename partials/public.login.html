@@ -1,16 +1,16 @@
-<div class="grid-container">
-    <div class="grid-50">
-        <img src="./img/ubeat-logo.png" />
-        <div class="login-panel">
+<div class="login-container">
+    <div class="login-panel">
+        <div class="login-header">
+            <img src="./img/ubeat-logo.png" />
+        </div>
+        <div class="login-body">
             <h4>Sign in to your account</h4>
-            <label ng-show="error">{{error}}</label>
+            <h4 class="error" ng-show="error">{{error}}</h4>
             <form>
                 <div>
-                    <i class="fa fa-envelope-square"></i>
                     <input type="text" class="form-control" placeholder="Email" ng-model="email">
                 </div>
                 <div>
-                    <i class="fa fa-lock"></i>
                     <input type="password" class="form-control" placeholder="Password" ng-model="password">
                 </div>
 

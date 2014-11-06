@@ -46,3 +46,7 @@
     vertical-align: middle;
     line-height: normal;
 }
+
+.playlist-details a {
+    font-size: inherit;
+}
