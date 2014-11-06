@@ -8,7 +8,7 @@
                 <option ng-repeat="playlist in playlists" value="{{playlist.id}}">{{playlist.name | limitTo:50}}</option>
             </select-->
 
-        <select ng-model="selectedPlaylist.id" ng-options="playlist.name for playlist in playlists | orderBy: 'name'">
+        <select ng-model="selectedPlaylist.playlist" ng-options="playlist.name for playlist in playlists | orderBy: 'name'">
             <option value="">-- choose playlist --</option>
         </select>
         </li>

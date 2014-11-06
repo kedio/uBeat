@@ -18,6 +18,7 @@
             <div class="playlist-actions btn-group pull-right">
                 <i class="fa clickable" ng-class="{'fa-stop' : isPlaylistPlaying(playlist) == true, 'fa-play-circle-o': isPlaylistPlaying(playlist) == false}" ng-click="togglePlaylist(playlist)"></i>
                 <i class="fa fa-times-circle-o clickable" ng-click="deletePlaylist(playlist)"></i>
+                <i class="fa fa-pencil clickable" ng-click="renamePlaylist(playlist)"></i>
             </div>
         </div>
     </div>

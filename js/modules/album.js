@@ -9,7 +9,7 @@ artistModule.config(function($stateProvider) {
 });
 
 
-artistModule.controller('albumController', function($scope, $state, $stateParams, APIService, $modal) {
+artistModule.controller('albumController', function($scope, $state, $stateParams, APIService,AudioService, $modal) {
     $scope.tracks = [];
     APIService.getAlbum($stateParams.albumId).success(function(data, status, headers, config){
         $scope.album = data.results[0];
@@ -40,7 +40,7 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
         $scope.tracksToAdd = [];
         angular.forEach($scope.tracks, function(track) {
             if (track.selected == true){
-                $scope.tracksToAdd = track;
+                $scope.tracksToAdd.push(track);
             }
         });
         $modal.open({
@@ -70,21 +70,20 @@ artistModule.controller('addToPlaylistController', function($scope, $rootScope, 
         $scope.playlists = data;
     })
 
-
-
-
     $scope.confirm = function() {
 
-        console.log($scope.selectedPlaylist.id);
+        console.log($scope.selectedPlaylist.playlist.id);
        // if(!tracks.isEmpty()){
-            APIService.updatePlaylist($scope.selectedPlaylist.id.id,$scope.selectedPlaylist.id.name, tracks);
-      //  }
-
-        $modalInstance.dismiss();
-    }
-
-    $scope.confirm = function() {
         console.log($scope.selectedPlaylist);
+        $scope.selectedPlaylist.playlist.tracks = $scope.selectedPlaylist.playlist.tracks.concat(tracks);
+        /*angular.forEach(tracks, function(track){
+          var singleTrack = [track];
+          APIService.updatePlaylist($scope.selectedPlaylist.playlist.id,$scope.selectedPlaylist.playlist.name, singleTrack);
+        })*/
+
+        APIService.updatePlaylist($scope.selectedPlaylist.playlist.id,$scope.selectedPlaylist.playlist.name, $scope.selectedPlaylist.playlist.tracks);
+
+        $modalInstance.close();
     }
 
     $scope.cancel = function() {

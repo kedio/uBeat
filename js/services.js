@@ -1,7 +1,7 @@
 var services = angular.module('services', ['ngCookies']);
 var api = {
-    //base: "http://localhost:3000"
-    base: "https://ubeat.herokuapp.com"
+    base: "http://localhost:3000"
+    //base: "https://ubeat.herokuapp.com"
 };
 
 services.factory('APIService', function($http) {
@@ -46,7 +46,10 @@ services.factory('APIService', function($http) {
             return $http.post(api.base + '/login', {email: email, password: password});
         },
 
-        updatePlaylist: function(playlistId, trackList, playlistName) {
+        updatePlaylist: function(playlistId, playlistName, trackList) {
+            angular.forEach(trackList, function(track){
+                track.audioObject = null;
+            })
            // return $http.post(api.base + '/login', {email: email, password: password});
             return $http.put(api.base + '/playlists/' + playlistId, {name: playlistName, tracks: trackList});
         },
