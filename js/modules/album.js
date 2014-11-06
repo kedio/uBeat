@@ -28,7 +28,7 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
     });
 
     $scope.toggleTrack = function(track){
-        if(track.status == 'playing'){
+        if(track.audioObject.paused == false){
             AudioService.pauseTrack(track);
         }
         else{
