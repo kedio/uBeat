@@ -140,7 +140,7 @@ playlistsModule.controller('playlistCreateController', function($scope, $rootSco
 playlistsModule.controller('playlistRenameController', function($scope, $rootScope, $modalInstance, APIService, playlist){
     $scope.playlist = playlist;
     $scope.confirm = function() {
-        APIService.updatePlaylist($scope.playlist.id, $scope.playlist.name, $rootScope.user.email).success(function() {
+        APIService.updatePlaylist($scope.playlist.id, $scope.playlist.name, $scope.playlist.tracks).success(function() {
             $modalInstance.close();
         }).error(function(error) {
             console.log('error while renaming playlist', error);
