@@ -1,5 +1,6 @@
 <div class="grid-container">
     <div class="grid-50">
+        <img src="./img/ubeat-logo.png" />
         <div class="login-panel">
             <h4>Sign in to your account</h4>
             <label ng-show="error">{{error}}</label>
@@ -13,7 +14,7 @@
                     <input type="password" class="form-control" placeholder="Password" ng-model="password">
                 </div>
 
-                    <button ng-click="login(email, password)">login <i class="fa fa-angle-right"></i></button>
+                    <button class="login" ng-click="login(email, password)">login <i class="fa fa-angle-right"></i></button>
             </form>
 
         </div>
