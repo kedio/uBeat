@@ -62,6 +62,16 @@ services.factory('APIService', function($http) {
 
         logout: function() {
             return $http.get(api.base + '/logout');
+        },
+
+        search: function(queryString, option){
+            if(option == 'all'){
+                return $http.get(api.base + '/search?q=' + queryString);
+            }
+            else{
+                return $http.get(api.base +'/search/' + option + '?q=' + queryString);
+            }
+
         }
 
     }

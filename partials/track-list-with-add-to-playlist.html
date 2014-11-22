@@ -1,0 +1,22 @@
+<table>
+    <thead>
+    <tr>
+        <th width="100px">Track #</th>
+        <th>Name</th>
+        <th>length</th>
+        <th>select all:</th>
+        <th> <input type="checkbox" ng-click="toggleSelection(!allSelected); allSelected = !allSelected;"></th>
+        <th> </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="track in tracks">
+        <td>{{track.trackNumber}}</td>
+        <td>{{track.trackName}}</td>
+        <td>{{track.time.format()}}</td>
+        <td><i class="fa" ng-class="{'fa-pause' : track.audioObject.paused == false, 'fa-play-circle-o': track.audioObject.paused == true}" ng-click="toggleTrack(track)"></i> <span class='hide-on-mobile'>play</span></td>
+        <td><input type="checkbox" ng-model="track.selected"></td>
+    </tr>
+    </tbody>
+</table>
+<button ng-click="addSelectedToPlaylist()">Add selected track(s) to playlist</button>

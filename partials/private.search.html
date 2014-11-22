@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h2>Search</h2>
+<input type="text" ng-model="queryString">
+<select ng-model="selectedOption" ng-options="option for option in searchOptions">
+</select>
+<button class="btn" ng-click="search()">search</button>
+
+<div id="artists-result" ng-hide="resultArtists.length == 0">
+    <h3>Artists</h3>
+</div>
+
+<div id="albums-result" ng-hide="resultAlbums.length == 0">
+    <h3>Albums</h3>
+    <div class="grid-50 tablet-grid-50" ng-repeat="album in resultAlbums">
+        <div class="panel">
+            <div class="album-image"><a href="/album/{{album.collectionId}}"><img  ng-src="{{album.artworkUrl100}}"/></a></div>
+            <div class="album-description">
+                <p class="text-strong"><a ui-sref="private.album({albumId: album.collectionId})">{{album.collectionName}}</a></p>
+                <p class="artist">by <a class="text-emphasis" ui-sref="private.artist({artistId: album.artistId})">{{album.artistName}}</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="tracks-result" ng-hide="tracks.length == 0">
+    <h3>Tracks</h3>
+    <ng-include src="'/partials/track-list-with-add-to-playlist.html'"></ng-include>
+</div>
+</body>
+</html>
