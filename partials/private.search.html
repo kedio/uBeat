@@ -29,9 +29,9 @@
     </div>
 </div>
 
-<div id="tracks-result" ng-hide="tracks.length == 0">
+<div id="tracks-result" ng-hide="tracklist.tracks.length == 0">
     <h3>Tracks</h3>
-    <ng-include src="'/partials/track-list-with-add-to-playlist.html'"></ng-include>
+    <tracklist data="tracklist" ></tracklist>
 </div>
 </body>
 </html>

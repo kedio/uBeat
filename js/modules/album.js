@@ -1,4 +1,4 @@
-var artistModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap', 'Audio']);
+var artistModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap', 'Audio','tracks']);
 
 artistModule.config(function($stateProvider) {
     $stateProvider.state('private.album', {
@@ -9,22 +9,20 @@ artistModule.config(function($stateProvider) {
 });
 
 
-artistModule.controller('albumController', function($scope, $state, $stateParams, APIService,AudioService, $modal) {
-    $scope.tracks = [];
+artistModule.controller('albumController', function($scope, $state, $stateParams, APIService,AudioService, $modal,tracklistFactory) {
+    $scope.tracklist = [];
     APIService.getAlbum($stateParams.albumId).success(function(data, status, headers, config){
         $scope.album = data.results[0];
         $scope.album.releaseDate = $scope.album.releaseDate.substr(0, 10);
     });
 
     APIService.getAlbumsTracks($stateParams.albumId).success(function(data, status, headers, config){
-        angular.forEach(data.results, function(track){
+        /*angular.forEach(data.results, function(track){
             track.time = new Time(track.trackTimeMillis);
             AudioService.registerTrack(track);
-        })
-        /*for(var i = 0; i < data.results.length; i++){
-            data.results[i].time = new Time(data.results[i].trackTimeMillis);
-        }*/
-        $scope.tracks = data.results;
+        })*/
+
+        $scope.tracklist = tracklistFactory.createTrackList(data.results);
     });
 
     $scope.toggleTrack = function(track){
@@ -38,7 +36,7 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
 
     $scope.addSelectedToPlaylist = function() {
         $scope.tracksToAdd = [];
-        angular.forEach($scope.tracks, function(track) {
+        angular.forEach($scope.tracklist.tracks, function(track) {
             if (track.selected == true){
                 $scope.tracksToAdd.push(track);
             }
@@ -55,7 +53,7 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
     };
 
     $scope.toggleSelection = function(selected) {
-        angular.forEach($scope.tracks, function(track) {
+        angular.forEach($scope.tracklist.tracks, function(track) {
             track.selected = selected;
         });
     }

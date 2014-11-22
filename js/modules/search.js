@@ -12,38 +12,23 @@ searchModule.config(function($stateProvider) {
 
 });
 
-searchModule.controller('searchController', function($scope, $rootScope, $state, $stateParams, APIService, $modal, AudioService) {
+searchModule.controller('searchController', function($scope, $rootScope, $state, $stateParams, APIService, tracklistFactory) {
 
     resetResults();
     $scope.searchOptions = ['all', 'artists', 'albums', 'tracks', 'users'];
     $scope.selectedOption = 'all';
-
+    $scope.tracklist = tracklistFactory.createTrackList([]);
     $scope.search = function(){
         console.log($scope.queryString + ': ' + $scope.selectedOption);
         APIService.search($scope.queryString, $scope.selectedOption).success(function(data){
             resetResults();
-            /*for(var i = 0; i < data.results.length; i++){
-                if(data.results[i].wrapperType == undefined){
-                    $scope.resultUsers.push(result);
-                }
-                else{
-                    switch(data.results[i].wrapperType){
-                        case 'track': $scope.resultTracks.push(data.results[i]);
-                            break;
-                        case 'collection': $scope.resultAlbums.push(data.results[i]);
-                            break;
-                        case 'artist': $scope.resultArtists.push(data.results[i]);
-                            break;
-                    }
-                }
-            }*/
             angular.forEach(data.results, function(result){
                 if(result.wrapperType == undefined){
                     $scope.resultUsers.push(result);
                 }
                 else{
                     switch(result.wrapperType){
-                        case 'track': $scope.tracks.push(result);
+                        case 'track': resultTracks.push(result);
                             break;
                         case 'collection': $scope.resultAlbums.push(result);
                             break;
@@ -53,13 +38,14 @@ searchModule.controller('searchController', function($scope, $rootScope, $state,
                 }
 
             })
+            $scope.tracklist = tracklistFactory.createTrackList(resultTracks).disableShowTrackNo();
         })
     }
 
     function resetResults(){
         $scope.resultArtists = [];
         $scope.resultAlbums = [];
-        $scope.tracks = [];
+        resultTracks = [];
         $scope.resultUsers = [];
     }
 });
