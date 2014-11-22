@@ -1,4 +1,4 @@
-var playlistsModule = angular.module('playlists', ['ui.router', 'services', 'ngAudio', 'Audio']);
+var playlistsModule = angular.module('playlists', ['ui.router', 'services', 'ngAudio', 'Audio','tracks']);
 
 playlistsModule.config(function($stateProvider) {
     $stateProvider.state('private.playlists', {
@@ -89,7 +89,7 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
     }
 });
 
-playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService, ngAudio, AudioService){
+playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService, ngAudio, AudioService, tracklistFactory){
     function updateTrackList(){
         APIService.getPlaylistDetails($stateParams.playlistId).success(function(data, status, headers, config){
             angular.forEach(data.tracks, function(track){
@@ -97,6 +97,8 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
                 AudioService.registerTrack(track);
             });
             $scope.playlist = data;
+            $scope.tracklist = tracklistFactory.create(data.tracks)
+                .showName().showArtist().showAlbum().showLength().allowPlay();
         });
     }
    updateTrackList();

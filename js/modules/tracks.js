@@ -9,7 +9,7 @@ tracksModule.directive('tracklist', function(){
         scope:{
             tracklist: '=data'
         },
-        templateUrl: '/partials/track-list-with-add-to-playlist.html'
+        templateUrl: '/partials/tracklist.html'
     };
 });
 
@@ -52,7 +52,7 @@ tracksModule.controller('tracklistController', function($scope,AudioService, $mo
 
 tracksModule.factory('tracklistFactory', function(AudioService){
     return {
-        createTrackList: function(tracks){
+        create: function(tracks){
             for(var i = 0 ; i < tracks.length; i++){
                 AudioService.registerTrack(tracks[i]);
                 tracks[i].time = new Time(tracks[i].trackTimeMillis);

@@ -38,7 +38,8 @@ searchModule.controller('searchController', function($scope, $rootScope, $state,
                 }
 
             })
-            $scope.tracklist = tracklistFactory.createTrackList(resultTracks).disableShowTrackNo();
+            $scope.tracklist = tracklistFactory.create(resultTracks)
+                .showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
         })
     }
 

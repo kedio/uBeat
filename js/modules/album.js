@@ -17,12 +17,9 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
     });
 
     APIService.getAlbumsTracks($stateParams.albumId).success(function(data, status, headers, config){
-        /*angular.forEach(data.results, function(track){
-            track.time = new Time(track.trackTimeMillis);
-            AudioService.registerTrack(track);
-        })*/
 
-        $scope.tracklist = tracklistFactory.createTrackList(data.results);
+        $scope.tracklist = tracklistFactory.create(data.results)
+            .showTrackNo().showName().showLength().allowPlay().allowAddToPlaylist();
     });
 
     $scope.toggleTrack = function(track){
@@ -71,13 +68,8 @@ artistModule.controller('addToPlaylistController', function($scope, $rootScope, 
     $scope.confirm = function() {
 
         console.log($scope.selectedPlaylist.playlist.id);
-       // if(!tracks.isEmpty()){
         console.log($scope.selectedPlaylist);
         $scope.selectedPlaylist.playlist.tracks = $scope.selectedPlaylist.playlist.tracks.concat(tracks);
-        /*angular.forEach(tracks, function(track){
-          var singleTrack = [track];
-          APIService.updatePlaylist($scope.selectedPlaylist.playlist.id,$scope.selectedPlaylist.playlist.name, singleTrack);
-        })*/
 
         APIService.updatePlaylist($scope.selectedPlaylist.playlist.id,$scope.selectedPlaylist.playlist.name, $scope.selectedPlaylist.playlist.tracks);
 
