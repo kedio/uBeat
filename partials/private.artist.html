@@ -8,7 +8,7 @@
 <div class="grid-container">
     <div class="grid-33">
         <div class="image-container">
-            <img ng-src="{{relatedAlbums[0].artworkUrl100}}"/>
+            <img ng-src="{{albumList.albums[0].artworkUrl100}}"/>
         </div>
         <div class="information-container">
             <ul>
@@ -29,14 +29,6 @@
         <div class="section-header small">
             <h2>Related Albums</h2>
         </div>
-        <div class="grid-50 tablet-grid-50" ng-repeat="album in relatedAlbums">
-            <div class="panel">
-                <div class="album-image"><a href="/album/{{album.collectionId}}"><img  ng-src="{{album.artworkUrl100}}"/></a></div>
-                <div class="album-description">
-                    <p class="text-strong"><a ui-sref="private.album({albumId: album.collectionId})">{{album.collectionName}}</a></p>
-                    <p class="artist">by <a class="text-emphasis" ui-sref="private.artist({artistId: album.artistId})">{{album.artistName}}</a></p>
-                </div>
-            </div>
-        </div>
+        <albumlist data="albumList"></albumlist>
     </div>
 </div>

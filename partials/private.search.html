@@ -23,17 +23,9 @@
     </div>
 </div>
 
-<div id="albums-result" ng-hide="resultAlbums.length == 0">
+<div id="albums-result" ng-hide="resultAlbums.length == 0" ng-style="albumlist.height">
     <h3>Albums</h3>
-    <div class="grid-50 tablet-grid-50" ng-repeat="album in resultAlbums">
-        <div class="panel">
-            <div class="album-image"><a href="/album/{{album.collectionId}}"><img  ng-src="{{album.artworkUrl100}}"/></a></div>
-            <div class="album-description">
-                <p class="text-strong"><a ui-sref="private.album({albumId: album.collectionId})">{{album.collectionName}}</a></p>
-                <p class="artist">by <a class="text-emphasis" ui-sref="private.artist({artistId: album.artistId})">{{album.artistName}}</a></p>
-            </div>
-        </div>
-    </div>
+    <albumlist data="albumlist"></albumlist>
 </div>
 
 <div id="tracks-result" ng-hide="tracklist.tracks.length == 0">

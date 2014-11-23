@@ -9,13 +9,13 @@ artistModule.config(function($stateProvider) {
 });
 
 
-artistModule.controller('artistController', function($scope, $state,$stateParams, APIService) {
+artistModule.controller('artistController', function($scope, $state,$stateParams, APIService, albumlistFactory) {
     $scope.relatedAlbums = [];
     APIService.getArtist($stateParams.artistId).success(function(data, status, headers, config){
         $scope.artist = data.results[0];
 
         APIService.getAlbumsForArtist($stateParams.artistId).success(function(data, status, headers, config){
-            $scope.relatedAlbums = data.results;
+            $scope.albumList = albumlistFactory.create(data.results);
         });
     });
 });

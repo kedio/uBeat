@@ -12,12 +12,13 @@ searchModule.config(function($stateProvider) {
 
 });
 
-searchModule.controller('searchController', function($scope, $rootScope, $state, $stateParams, APIService, tracklistFactory) {
+searchModule.controller('searchController', function($scope, $rootScope, $state, $stateParams, APIService, tracklistFactory, albumlistFactory) {
 
     resetResults();
-    $scope.searchOptions = ['all', 'artists', 'albums', 'tracks', 'users'];
+    $scope.searchOptions = ['all', 'artists', 'albums', 'tracks'];
     $scope.selectedOption = 'all';
     $scope.tracklist = tracklistFactory.create([]);
+    $scope.albumlist = albumlistFactory.create([]);
     $scope.search = function(){
         console.log($scope.queryString + ': ' + $scope.selectedOption);
         APIService.search($scope.queryString, $scope.selectedOption).success(function(data){
@@ -40,6 +41,7 @@ searchModule.controller('searchController', function($scope, $rootScope, $state,
             })
             $scope.tracklist = tracklistFactory.create(resultTracks)
                 .showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
+            $scope.albumlist = albumlistFactory.create($scope.resultAlbums);
         })
     }
 
@@ -47,7 +49,6 @@ searchModule.controller('searchController', function($scope, $rootScope, $state,
         $scope.resultArtists = [];
         $scope.resultAlbums = [];
         resultTracks = [];
-        $scope.resultUsers = [];
     }
 });
 

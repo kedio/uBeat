@@ -1,6 +1,7 @@
-var artistModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap', 'Audio','tracks']);
+var albumModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap', 'Audio','tracks']);
 
-artistModule.config(function($stateProvider) {
+
+albumModule.config(function($stateProvider) {
     $stateProvider.state('private.album', {
         url: "/album/:albumId",
         templateUrl: "/partials/private.album.html",
@@ -8,8 +9,26 @@ artistModule.config(function($stateProvider) {
     });
 });
 
+albumModule.directive('albumlist', function(){
+    return{
+        restrict: 'E',
+        scope:{
+            albumlist: '=data'
+        },
+        templateUrl: '/partials/albums-list.html'
+    };
+})
 
-artistModule.controller('albumController', function($scope, $state, $stateParams, APIService,AudioService, $modal,tracklistFactory) {
+albumModule.factory('albumlistFactory', function(){
+    return  {
+        create: function(albums){
+           return new Albumlist(albums)
+        }
+    };
+})
+
+
+albumModule.controller('albumController', function($scope, $state, $stateParams, APIService,AudioService, $modal,tracklistFactory) {
     $scope.tracklist = [];
     APIService.getAlbum($stateParams.albumId).success(function(data, status, headers, config){
         $scope.album = data.results[0];
@@ -57,7 +76,7 @@ artistModule.controller('albumController', function($scope, $state, $stateParams
 });
 
 
-artistModule.controller('addToPlaylistController', function($scope, $rootScope, $modalInstance, $state, APIService, tracks) {
+albumModule.controller('addToPlaylistController', function($scope, $rootScope, $modalInstance, $state, APIService, tracks) {
     $scope.playlists = [];
     $scope.selectedPlaylist = {};
 
