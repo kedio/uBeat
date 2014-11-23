@@ -1,4 +1,4 @@
-var artistModule = angular.module('artist', ['ui.router', 'services']);
+var artistModule = angular.module('artist', ['ui.router', 'services','albumlistModule']);
 
 artistModule.config(function($stateProvider) {
     $stateProvider.state('private.artist', {

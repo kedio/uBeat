@@ -1,4 +1,4 @@
-var albumModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap', 'Audio','tracks']);
+var albumModule = angular.module('album', ['ui.router', 'services', 'ui.bootstrap', 'Audio','tracklist']);
 
 
 albumModule.config(function($stateProvider) {
@@ -8,24 +8,6 @@ albumModule.config(function($stateProvider) {
         controller: 'albumController'
     });
 });
-
-albumModule.directive('albumlist', function(){
-    return{
-        restrict: 'E',
-        scope:{
-            albumlist: '=data'
-        },
-        templateUrl: '/partials/albums-list.html'
-    };
-})
-
-albumModule.factory('albumlistFactory', function(){
-    return  {
-        create: function(albums){
-           return new Albumlist(albums)
-        }
-    };
-})
 
 
 albumModule.controller('albumController', function($scope, $state, $stateParams, APIService,AudioService, $modal,tracklistFactory) {
@@ -40,39 +22,6 @@ albumModule.controller('albumController', function($scope, $state, $stateParams,
         $scope.tracklist = tracklistFactory.create(data.results)
             .showTrackNo().showName().showLength().allowPlay().allowAddToPlaylist();
     });
-
-    $scope.toggleTrack = function(track){
-        if(track.audioObject.paused == false){
-            AudioService.pauseTrack(track);
-        }
-        else{
-            AudioService.playTrack(track);
-        }
-    }
-
-    $scope.addSelectedToPlaylist = function() {
-        $scope.tracksToAdd = [];
-        angular.forEach($scope.tracklist.tracks, function(track) {
-            if (track.selected == true){
-                $scope.tracksToAdd.push(track);
-            }
-        });
-        $modal.open({
-            templateUrl: "/partials/private.album.addToPlaylist.html",
-            controller:"addToPlaylistController",
-            resolve:{
-                tracks: function() {
-                    return $scope.tracksToAdd;
-                }
-            }
-        });
-    };
-
-    $scope.toggleSelection = function(selected) {
-        angular.forEach($scope.tracklist.tracks, function(track) {
-            track.selected = selected;
-        });
-    }
 });
 
 

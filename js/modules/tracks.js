@@ -3,16 +3,6 @@
  */
 var tracksModule = angular.module('tracks', ['ui.bootstrap','Audio','album']);
 
-tracksModule.directive('tracklist', function(){
-    return{
-        restrict: 'E',
-        scope:{
-            tracklist: '=data'
-        },
-        templateUrl: '/partials/tracklist.html'
-    };
-});
-
 tracksModule.controller('tracklistController', function($scope,AudioService, $modal){
 
     $scope.toggleTrack = function(track){
@@ -49,15 +39,3 @@ tracksModule.controller('tracklistController', function($scope,AudioService, $mo
     }
 
 });
-
-tracksModule.factory('tracklistFactory', function(AudioService){
-    return {
-        create: function(tracks){
-            for(var i = 0 ; i < tracks.length; i++){
-                AudioService.registerTrack(tracks[i]);
-                tracks[i].time = new Time(tracks[i].trackTimeMillis);
-            }
-            return new Tracklist(tracks);
-        }
-    }
-})

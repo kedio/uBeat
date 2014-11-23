@@ -1,7 +1,7 @@
 /**
  * Created by dominique on 22/11/14.
  */
-var searchModule = angular.module('search', ['ui.router', 'services']);
+var searchModule = angular.module('search', ['ui.router', 'services','albumlistModule','tracklist']);
 
 searchModule.config(function($stateProvider) {
     $stateProvider.state('private.search', {

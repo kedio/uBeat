@@ -1,4 +1,4 @@
-var playlistsModule = angular.module('playlists', ['ui.router', 'services', 'ngAudio', 'Audio','tracks']);
+var playlistsModule = angular.module('playlists', ['ui.router', 'services', 'ngAudio', 'Audio','tracklist']);
 
 playlistsModule.config(function($stateProvider) {
     $stateProvider.state('private.playlists', {
