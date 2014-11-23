@@ -1,0 +1,9 @@
+<div ng-style="artistlist.height">
+    <div class="grid-50 tablet-grid-50" ng-repeat="artist in artistlist.artists" >
+        <div class="panel">
+            <div class="album-description">
+                <p class="text-strong"><a ui-sref="private.artist({artistId: artist.artistId})">{{artist.artistName}}</a></p>
+            </div>
+        </div>
+    </div>
+</div>

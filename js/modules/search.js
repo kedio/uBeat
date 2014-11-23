@@ -1,7 +1,7 @@
 /**
  * Created by dominique on 22/11/14.
  */
-var searchModule = angular.module('search', ['ui.router', 'services','albumlistModule','tracklist']);
+var searchModule = angular.module('search', ['ui.router', 'services','albumlistModule','tracklist','artistlist']);
 
 searchModule.config(function($stateProvider) {
     $stateProvider.state('private.search', {
@@ -12,7 +12,7 @@ searchModule.config(function($stateProvider) {
 
 });
 
-searchModule.controller('searchController', function($scope, $rootScope, $state, $stateParams, APIService, tracklistFactory, albumlistFactory) {
+searchModule.controller('searchController', function($scope, $rootScope, $state, $stateParams, APIService, tracklistFactory, albumlistFactory, artistlistFactory) {
 
     resetResults();
     $scope.searchOptions = ['all', 'artists', 'albums', 'tracks'];
@@ -42,6 +42,7 @@ searchModule.controller('searchController', function($scope, $rootScope, $state,
             $scope.tracklist = tracklistFactory.create(resultTracks)
                 .showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
             $scope.albumlist = albumlistFactory.create($scope.resultAlbums);
+            $scope.artistlist = artistlistFactory.create($scope.resultArtists);
         })
     }
 
