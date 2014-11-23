@@ -30,8 +30,8 @@ services.factory('APIService', function($http) {
             return $http.get(api.base + '/playlists/' + playlistId);
         },
 
-        deleteTrackFromPlayList:function(playlistId, playlistTrackId){
-            return $http.delete(api.base + '/playlists/' + playlistId + '/tracks/' + playlistTrackId);
+        deleteTrackFromPlayList:function(playlistId, trackId){
+            return $http.delete(api.base + '/playlists/' + playlistId + '/tracks/' + trackId);
         },
 
         createPlaylist: function(playlistName, email) {

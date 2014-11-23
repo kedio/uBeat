@@ -10,7 +10,8 @@ function Tracklist(tracks){
         showAlbum: false,
         showLength: false,
         allowPlay: false,
-        allowAddToPlaylist: false
+        allowAddToPlaylist: false,
+        allowDelete: false
 
     };
 
@@ -48,6 +49,11 @@ function Tracklist(tracks){
         this.settings.allowAddToPlaylist = true;
         return this;
     };
+
+    this.allowDelete = function(){
+        this.settings.allowDelete = true;
+        return this;
+    }
 
 
     this.getTracks = function(){

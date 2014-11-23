@@ -1,7 +1,7 @@
 /**
  * Created by dominique on 23/11/14.
  */
-angular.module('tracklist',[])
+angular.module('tracklist',['ui.router','services'])
 
 .directive('tracklist', function(){
         return{
@@ -23,4 +23,48 @@ angular.module('tracklist',[])
             return new Tracklist(tracks);
         }
     }
+})
+
+.controller('tracklistController', function($scope, $state, $stateParams, AudioService, $modal, APIService){
+
+    $scope.toggleTrack = function(track){
+        if(track.audioObject.paused == false){
+            AudioService.pauseTrack(track);
+        }
+        else{
+            AudioService.playTrack(track);
+        }
+    };
+
+    $scope.addSelectedToPlaylist = function() {
+        $scope.tracksToAdd = [];
+        angular.forEach($scope.tracklist.tracks, function(track) {
+            if (track.selected == true){
+                $scope.tracksToAdd.push(track);
+            }
+        });
+        $modal.open({
+            templateUrl: "/partials/private.album.addToPlaylist.html",
+            controller:"addToPlaylistController",
+            resolve:{
+                tracks: function() {
+                    return $scope.tracksToAdd;
+                }
+            }
+        });
+    };
+
+    $scope.toggleSelection = function(selected) {
+        angular.forEach($scope.tracklist.tracks, function(track) {
+            track.selected = selected;
+        });
+    }
+
+    $scope.deleteTrack = function(track){
+        track.audioObject.stop();
+        APIService.deleteTrackFromPlayList($stateParams.playlistId, track.trackId).success(function() {
+            $scope.tracklist.tracks.remove(track);
+        });
+    }
+
 });

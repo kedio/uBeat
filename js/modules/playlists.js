@@ -98,27 +98,11 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
             });
             $scope.playlist = data;
             $scope.tracklist = tracklistFactory.create(data.tracks)
-                .showName().showArtist().showAlbum().showLength().allowPlay();
+                .showName().showArtist().showAlbum().showLength().allowPlay().allowDelete();
         });
     }
    updateTrackList();
     $scope.currentPlayingTrack = null;
-
-    $scope.deleteTrack = function(track){
-        track.audioObject.stop();
-        APIService.deleteTrackFromPlayList($stateParams.playlistId, track._id).success(function() {
-            $scope.playlist.tracks.remove(track);
-        });
-    }
-
-    $scope.toggleTrack = function(track){
-        if(track.audioObject.paused == false){
-            AudioService.pauseTrack(track);
-        }
-        else{
-            AudioService.playTrack(track);
-        }
-    }
 });
 
 playlistsModule.controller('playlistCreateController', function($scope, $rootScope, $modalInstance, APIService, myPlaylists, otherPlaylists){
