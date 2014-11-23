@@ -16,8 +16,8 @@ angular.module('albumlistModule', [])
 
 .factory('albumlistFactory', function(){
         return  {
-            create: function(albums){
-                return new Albumlist(albums)
+            create: function(name, albums){
+                return new Albumlist(name, albums)
             }
         };
     })

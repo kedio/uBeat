@@ -1,4 +1,7 @@
 <div ng-controller="tracklistController" >
+    <div ng-hide="tracklist.settings.showListName == false" class="section-header small">
+        <h2>{{tracklist.name}}</h2>
+    </div>
     <table>
         <thead>
         <tr>

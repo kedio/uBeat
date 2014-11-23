@@ -17,8 +17,6 @@ searchModule.controller('searchController', function($scope, $rootScope, $state,
     resetResults();
     $scope.searchOptions = ['all', 'artists', 'albums', 'tracks'];
     $scope.selectedOption = 'all';
-    $scope.tracklist = tracklistFactory.create([]);
-    $scope.albumlist = albumlistFactory.create([]);
     $scope.search = function(){
         console.log($scope.queryString + ': ' + $scope.selectedOption);
         APIService.search($scope.queryString, $scope.selectedOption).success(function(data){
@@ -29,7 +27,7 @@ searchModule.controller('searchController', function($scope, $rootScope, $state,
                 }
                 else{
                     switch(result.wrapperType){
-                        case 'track': resultTracks.push(result);
+                        case 'track': $scope.resultTracks.push(result);
                             break;
                         case 'collection': $scope.resultAlbums.push(result);
                             break;
@@ -39,17 +37,17 @@ searchModule.controller('searchController', function($scope, $rootScope, $state,
                 }
 
             })
-            $scope.tracklist = tracklistFactory.create(resultTracks)
-                .showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
-            $scope.albumlist = albumlistFactory.create($scope.resultAlbums);
-            $scope.artistlist = artistlistFactory.create($scope.resultArtists);
+            $scope.tracklist = tracklistFactory.create('Tracks',$scope.resultTracks)
+                .showListName().showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
+            $scope.albumlist = albumlistFactory.create('Albums', $scope.resultAlbums);
+            $scope.artistlist = artistlistFactory.create('Artists', $scope.resultArtists);
         })
     }
 
     function resetResults(){
         $scope.resultArtists = [];
         $scope.resultAlbums = [];
-        resultTracks = [];
+        $scope.resultTracks = [];
     }
 });
 

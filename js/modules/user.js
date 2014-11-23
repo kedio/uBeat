@@ -12,7 +12,7 @@ user.controller('UserLoginController', function UserController($scope, $location
     $scope.login = function(email, password) {
         if (email != null && password != null) {
             APIService.login(email, password).success(function(user) {
-                console.log('suecess login');
+                console.log('success login');
                 $scope.error = false;
                 AuthenticationService.setAuthenticated(true);
                 AuthenticationService.setUser(user);

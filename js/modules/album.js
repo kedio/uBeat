@@ -19,7 +19,7 @@ albumModule.controller('albumController', function($scope, $state, $stateParams,
 
     APIService.getAlbumsTracks($stateParams.albumId).success(function(data, status, headers, config){
 
-        $scope.tracklist = tracklistFactory.create(data.results)
+        $scope.tracklist = tracklistFactory.create('Album Tracks',data.results)
             .showTrackNo().showName().showLength().allowPlay().allowAddToPlaylist();
     });
 });

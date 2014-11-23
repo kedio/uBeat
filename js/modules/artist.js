@@ -15,7 +15,7 @@ artistModule.controller('artistController', function($scope, $state,$stateParams
         $scope.artist = data.results[0];
 
         APIService.getAlbumsForArtist($stateParams.artistId).success(function(data, status, headers, config){
-            $scope.albumList = albumlistFactory.create(data.results);
+            $scope.albumList = albumlistFactory.create('Related Albums',data.results);
         });
     });
 });

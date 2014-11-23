@@ -15,8 +15,8 @@ angular.module('artistlist', [])
 
 .factory('artistlistFactory', function(){
         return {
-            create: function(artists){
-                return new ArtistList(artists);
+            create: function(name, artists){
+                return new ArtistList(name, artists);
             }
         }
     })

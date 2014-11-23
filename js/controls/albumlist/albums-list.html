@@ -1,4 +1,7 @@
 <div ng-style="albumlist.height">
+    <div class="section-header small">
+        <h2>{{albumlist.name}}</h2>
+    </div>
     <div class="grid-50 tablet-grid-50" ng-repeat="album in albumlist.albums">
         <div class="panel">
             <div class="album-image"><a href="/album/{{album.collectionId}}"><img  ng-src="{{album.artworkUrl100}}"/></a></div>

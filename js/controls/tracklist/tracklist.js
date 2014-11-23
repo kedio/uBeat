@@ -1,9 +1,11 @@
 /**
  * Created by dominique on 22/11/14.
  */
-function Tracklist(tracks){
+function Tracklist(name, tracks){
+    this.name = name;
     this.tracks = tracks;
     this.settings = {
+        showListName: false,
         showTrackNo: false,
         showName: false,
         showArtist: false,
@@ -12,8 +14,12 @@ function Tracklist(tracks){
         allowPlay: false,
         allowAddToPlaylist: false,
         allowDelete: false
-
     };
+
+    this.showListName = function(){
+        this.settings.showListName = true;
+        return this;
+    }
 
     this.showTrackNo = function(){
         this.settings.showTrackNo = true;

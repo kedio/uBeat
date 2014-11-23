@@ -12,25 +12,16 @@
 </select>
 <button class="btn" ng-click="search()">search</button>
 
-<div id="artists-result" ng-hide="resultArtists.length == 0" style="height:150px">
-    <h3>Artists</h3>
+<div id="artists-result" ng-hide="resultArtists.length == 0">
     <artistlist data="artistlist"></artistlist>
-    <!--<div class="grid-33 tablet-grid-33" ng-repeat="artist in resultArtists" >
-        <div class="panel">
-            <div class="album-description">
-                <p class="text-strong"><a ui-sref="private.artist({artistId: artist.artistId})">{{artist.artistName}}</a></p>
-            </div>
-       </div>-->
     </div>
 </div>
 
 <div id="albums-result" ng-hide="resultAlbums.length == 0" ng-style="albumlist.height">
-    <h3>Albums</h3>
     <albumlist data="albumlist"></albumlist>
 </div>
 
-<div id="tracks-result" ng-hide="tracklist.tracks.length == 0">
-    <h3>Tracks</h3>
+<div id="tracks-result" ng-hide="resultTracks.length == 0">
     <tracklist data="tracklist" ></tracklist>
 </div>
 </body>
