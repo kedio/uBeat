@@ -17,7 +17,7 @@ searchModule.controller('searchController', function($scope, $rootScope, $state,
     resetResults();
     $scope.searchOptions = ['all', 'artists', 'albums', 'tracks', 'users'];
     $scope.selectedOption = 'all';
-    $scope.tracklist = tracklistFactory.createTrackList([]);
+    $scope.tracklist = tracklistFactory.create([]);
     $scope.search = function(){
         console.log($scope.queryString + ': ' + $scope.selectedOption);
         APIService.search($scope.queryString, $scope.selectedOption).success(function(data){
