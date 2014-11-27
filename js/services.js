@@ -113,6 +113,9 @@ services.factory('TokenInterceptor', function ($q, $window, $location, Authentic
     return {
         // Add token to outgoing request
         request: function (config) {
+            if(config.url.has('http://developer.echonest.com/')){
+                return config;
+            }
             config.headers = config.headers || {};
             if (AuthenticationService.getToken()) {
                 config.headers.Authorization = AuthenticationService.getToken();
