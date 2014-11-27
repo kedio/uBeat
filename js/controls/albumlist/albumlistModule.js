@@ -1,7 +1,3 @@
-/**
- * Created by dominique on 23/11/14.
- */
-
 angular.module('albumlistModule', [])
 
 .directive('albumlist', function(){
@@ -20,4 +16,4 @@ angular.module('albumlistModule', [])
                 return new Albumlist(name, albums)
             }
         };
-    })
+    });

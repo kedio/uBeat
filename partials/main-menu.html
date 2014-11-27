@@ -6,12 +6,14 @@
     </div>
 
     <div class="header-right">
-        <div class="search-container">
-            <input type="text" class="search" placeholder="Search">
+        <div class="search-container" ng-hide="state.includes('private.search')">
+            <form ng-submit="search(searchQuery)">
+                <input type="text" class="search" ng-model="searchQuery" placeholder="Search">
+            </form>
         </div>
         <div class="user-menu hide-on-tablet hide-on-mobile">
             <img src="http://executivewinners.ca/wp-content/uploads/2013/11/generic_user_male.jpg">
-            <div class="user-details"><a>John Smith</a></div>
+            <div class="user-details"><a>{{user.name}}</a></div>
             <a class="logout"><i class="fa fa-sign-out"></i> <span>logout</span></a>
         </div>
     </div>

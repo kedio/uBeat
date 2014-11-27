@@ -1,6 +1,3 @@
-/**
- * Created by dominique on 23/11/14.
- */
 angular.module('artistlist', [])
 
 .directive('artistlist', function(){
@@ -19,4 +16,4 @@ angular.module('artistlist', [])
                 return new ArtistList(name, artists);
             }
         }
-    })
+    });

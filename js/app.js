@@ -1,7 +1,11 @@
 var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist', 'album', 'playlists', 'user','search','tracks']);
 
-ubeatcore.controller('mainController', function($scope, $state) {
+ubeatcore.controller('mainController', function($scope, $state, $location) {
     $scope.state = $state;
+
+    $scope.search = function(query) {
+        $location.path('/search').search({q: query});
+    };
 });
 
 
@@ -11,8 +15,6 @@ ubeatcore.config(function ($locationProvider, $urlRouterProvider,  $httpProvider
         requireBase: false
     });
 
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.interceptors.push('TokenInterceptor');
 
     $stateProvider.state('public', {
@@ -34,7 +36,7 @@ ubeatcore.config(function ($locationProvider, $urlRouterProvider,  $httpProvider
         templateUrl: '/partials/private.home.html'
     });
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/home');
 });
 
 ubeatcore.run(function($rootScope, $state, AuthenticationService) {

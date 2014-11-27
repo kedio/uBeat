@@ -1,18 +1,19 @@
-/**
- * Created by dominique on 22/11/14.
- */
 var searchModule = angular.module('search', ['ui.router', 'services','albumlistModule','tracklist','artistlist']);
 
 searchModule.config(function($stateProvider) {
     $stateProvider.state('private.search', {
         url: "/search",
         templateUrl: "/partials/private.search.html",
-        controller: 'searchController'
+        controller: 'searchController',
+        params: ['q', 'type']
     });
 
 });
 
-searchModule.controller('searchController', function($scope, $rootScope, $state, $stateParams, APIService, tracklistFactory, albumlistFactory, artistlistFactory) {
+searchModule.controller('searchController', function($scope, $stateParams, $location, APIService, tracklistFactory, albumlistFactory, artistlistFactory) {
+console.log($stateParams);
+
+
 
     resetResults();
     $scope.searchOptions = ['all', 'artists', 'albums', 'tracks'];
@@ -36,19 +37,34 @@ searchModule.controller('searchController', function($scope, $rootScope, $state,
                     }
                 }
 
-            })
+            });
             $scope.tracklist = tracklistFactory.create('Tracks',$scope.resultTracks)
                 .showListName().showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
             $scope.albumlist = albumlistFactory.create('Albums', $scope.resultAlbums);
             $scope.artistlist = artistlistFactory.create('Artists', $scope.resultArtists);
         })
-    }
+    };
 
     function resetResults(){
         $scope.resultArtists = [];
         $scope.resultAlbums = [];
         $scope.resultTracks = [];
     }
+
+    if($location.search().type) {
+        $scope.selectedOption = $location.search().type;
+    }
+    if($location.search().q) {
+        $scope.queryString = $location.search().q;
+        $scope.search();
+    }
+    $scope.$watch('queryString', function(queryString) {
+        $location.search('q', queryString);
+    });
+
+    $scope.$watch('selectedOption', function(selectedOption) {
+        $location.search('type', selectedOption);
+    });
 });
 
 

@@ -1,6 +1,3 @@
-/**
- * Created by dominique on 23/11/14.
- */
 angular.module('tracklist',['ui.router','services'])
 
 .directive('tracklist', function(){
@@ -58,7 +55,7 @@ angular.module('tracklist',['ui.router','services'])
         angular.forEach($scope.tracklist.tracks, function(track) {
             track.selected = selected;
         });
-    }
+    };
 
     $scope.deleteTrack = function(track){
         track.audioObject.stop();

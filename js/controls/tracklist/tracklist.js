@@ -1,6 +1,3 @@
-/**
- * Created by dominique on 22/11/14.
- */
 function Tracklist(name, tracks){
     this.name = name;
     this.tracks = tracks;
@@ -19,7 +16,7 @@ function Tracklist(name, tracks){
     this.showListName = function(){
         this.settings.showListName = true;
         return this;
-    }
+    };
 
     this.showTrackNo = function(){
         this.settings.showTrackNo = true;
