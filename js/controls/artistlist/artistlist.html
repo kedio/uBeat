@@ -1,5 +1,5 @@
 <div ng-controller="artistListController">
-    <div class="grid-50 tablet-grid-50" ng-repeat="artist in artistlist.artists" >
+    <div class="grid-50 tablet-grid-50" ng-repeat="artist in artists" >
         <div class="panel">
             <div class="album-image"><a ui-sref="private.artist({artistId: artist.artistId})"><img class="panel-image" ng-src="{{artist.artistImage}}"/></a></div>
             <div class="album-description">

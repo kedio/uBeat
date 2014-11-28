@@ -4,7 +4,7 @@ angular.module('artistlist', ['echonest'])
         return{
             restrict: 'E',
             scope:{
-                artistlist: '=data'
+                artists: '='
             },
             templateUrl: '/js/controls/artistlist/artistlist.html'
         };
@@ -19,11 +19,12 @@ angular.module('artistlist', ['echonest'])
     })
 
 .controller('artistListController', function($scope, echonest){
-    $scope.$watch('artistlist', function(newArtistlist){
-        if(newArtistlist == undefined){
+    $scope.$watch('artists', function(newArtists){
+        if(newArtists == undefined){
             return;
-        }
-        angular.forEach(newArtistlist.artists, function(artist){
+        };
+
+        angular.forEach(newArtists, function(artist){
             if(artist.artistImage == undefined){
                 echonest.getArtistImage(artist.artistName, function(artistImage){
                    artist.artistImage = artistImage;

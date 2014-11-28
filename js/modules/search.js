@@ -10,7 +10,7 @@ searchModule.config(function($stateProvider) {
 
 });
 
-searchModule.controller('searchController', function($scope, $stateParams, $location, APIService, tracklistFactory, albumlistFactory, artistlistFactory) {
+searchModule.controller('searchController', function($scope, $stateParams, $location, APIService, tracklistFactory, artistlistFactory) {
 
     function searchMusic(){
         APIService.search($scope.queryString, $scope.selectedOption).success(function(data){
@@ -27,7 +27,6 @@ searchModule.controller('searchController', function($scope, $stateParams, $loca
             }
             $scope.tracklist = tracklistFactory.create($scope.resultTracks)
                 .showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
-            $scope.albumlist = albumlistFactory.create($scope.resultAlbums);
             $scope.artistlist = artistlistFactory.create( $scope.resultArtists);
         })
     }

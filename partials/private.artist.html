@@ -31,8 +31,8 @@
             <h2 ng-click="activateTab('biography')" class="grid-33">Biography</h2>
             <h2 ng-click="activateTab('related')" class="grid-33">Related</h2>
         </div>
-        <albumlist ng-if="activeTab == 'albums'" data="albumList"></albumlist>
+        <albumlist ng-if="activeTab == 'albums'" albums="artistAlbums"></albumlist>
         <biography ng-if="activeTab == 'biography'" text="artist.biography.text" url="artist.biography.url"></biography>
-        <artistlist ng-if="activeTab == 'related'" data="similarArtistsList"></artistlist>
+        <artistlist ng-if="activeTab == 'related'" artists="similarArtistsList"></artistlist>
     </div>
 </div>

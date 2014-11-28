@@ -9,14 +9,14 @@ artistModule.config(function($stateProvider) {
 });
 
 
-artistModule.controller('artistController', function($scope, $state,$stateParams, APIService, albumlistFactory, artistlistFactory, echonest) {
+artistModule.controller('artistController', function($scope, $state,$stateParams, APIService, artistlistFactory, echonest) {
     $scope.activeTab = 'albums'
     $scope.relatedAlbums = [];
     APIService.getArtist($stateParams.artistId).success(function(data, status, headers, config){
         $scope.artist = data.results[0];
 
         APIService.getAlbumsForArtist($stateParams.artistId).success(function(data, status, headers, config){
-            $scope.albumList = albumlistFactory.create(data.results);
+            $scope.artistAlbums = data.results;
 
             echonest.getArtistImage($scope.artist.artistName, function(artistImage){
                 if(artistImage == undefined){
@@ -34,7 +34,7 @@ artistModule.controller('artistController', function($scope, $state,$stateParams
         })
 
         echonest.getSimilar($scope.artist.artistName, function(similarArtists){
-            $scope.similarArtistsList = artistlistFactory.create(similarArtists);
+            $scope.similarArtistsList = similarArtists;
         })
     });
 
