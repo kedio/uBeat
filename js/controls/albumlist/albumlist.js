@@ -1,13 +1,7 @@
 
-function Albumlist(name, albums){
-    this.name = name;
+function Albumlist(albums){
     this.albums = albums;
     this.settings = {
         showName: false
     }
-
-    this.showName = function(){
-        this.settings.showName = true;
-        return this;
-    };
 }

@@ -12,12 +12,12 @@ angular.module('tracklist',['ui.router','services'])
 
 .factory('tracklistFactory', function(AudioService){
     return {
-        create: function(name, tracks){
+        create: function(tracks){
             for(var i = 0 ; i < tracks.length; i++){
                 AudioService.registerTrack(tracks[i]);
                 tracks[i].time = new Time(tracks[i].trackTimeMillis);
             }
-            return new Tracklist(name, tracks);
+            return new Tracklist(tracks);
         }
     }
 })

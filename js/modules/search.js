@@ -38,10 +38,10 @@ console.log($stateParams);
                 }
 
             });
-            $scope.tracklist = tracklistFactory.create('Tracks',$scope.resultTracks)
-                .showListName().showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
-            $scope.albumlist = albumlistFactory.create('Albums', $scope.resultAlbums).showName();
-            $scope.artistlist = artistlistFactory.create('Artists', $scope.resultArtists);
+            $scope.tracklist = tracklistFactory.create($scope.resultTracks)
+                .showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
+            $scope.albumlist = albumlistFactory.create($scope.resultAlbums);
+            $scope.artistlist = artistlistFactory.create( $scope.resultArtists);
         })
     };
 

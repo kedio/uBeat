@@ -11,16 +11,19 @@
 
     <div>
         <div class="grid-100" style="padding:0">
+            <h2>Artists</h2>
             <div id="artists-result" ng-hide="resultArtists.length == 0">
                 <artistlist data="artistlist"></artistlist>
             </div>
         </div>
         <div class="grid-100" style="padding:0">
+            <h2>Albums</h2>
             <div id="albums-result" ng-hide="resultAlbums.length == 0" ng-style="albumlist.height">
                 <albumlist data="albumlist"></albumlist>
             </div>
         </div>
         <div class="grid-100" style="padding:0">
+            <h2>Tracks</h2>
             <div id="tracks-result" ng-hide="resultTracks.length == 0">
                 <tracklist data="tracklist" ></tracklist>
             </div>

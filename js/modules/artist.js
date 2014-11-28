@@ -16,18 +16,25 @@ artistModule.controller('artistController', function($scope, $state,$stateParams
         $scope.artist = data.results[0];
 
         APIService.getAlbumsForArtist($stateParams.artistId).success(function(data, status, headers, config){
-            $scope.albumList = albumlistFactory.create('Related Albums',data.results);
+            $scope.albumList = albumlistFactory.create(data.results);
+
+            echonest.getArtistImage($scope.artist.artistName, function(artistImage){
+                if(artistImage == undefined){
+                    $scope.artist.artistImage = $scope.albumList.albums[0].artworkUrl100;
+                }
+                else{
+                    $scope.artist.artistImage = artistImage;
+                }
+
+            })
+
         });
         echonest.getArtistBiography($scope.artist.artistName, function(biography){
             $scope.artist.biography = biography;
         })
 
-        echonest.getArtistImage($scope.artist.artistName, function(artistImage){
-            $scope.artist.artistImage = artistImage;
-        })
-
         echonest.getSimilar($scope.artist.artistName, function(similarArtists){
-            $scope.similarArtistsList = artistlistFactory.create('similarArtists', similarArtists);
+            $scope.similarArtistsList = artistlistFactory.create(similarArtists);
         })
     });
 

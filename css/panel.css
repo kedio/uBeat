@@ -17,3 +17,8 @@
     line-height: 0;
     font-size: 0;
 }
+
+.panel-image{
+    height: 100px;
+    width: 100px;
+}

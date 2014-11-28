@@ -1,10 +1,7 @@
 <div>
-    <div ng-if='' class="section-header small">
-        <h2>{{albumlist.name}}</h2>
-    </div>
     <div class="grid-50 tablet-grid-50" ng-repeat="album in albumlist.albums">
         <div class="panel">
-            <div class="album-image"><a href="/album/{{album.collectionId}}"><img  ng-src="{{album.artworkUrl100}}"/></a></div>
+            <div class="album-image"><a href="/album/{{album.collectionId}}"><img class="panel-image"  ng-src="{{album.artworkUrl100}}"/></a></div>
             <div class="album-description">
                 <p class="text-strong"><a ui-sref="private.album({albumId: album.collectionId})">{{album.collectionName}}</a></p>
                 <p class="artist">by <a class="text-emphasis" ui-sref="private.artist({artistId: album.artistId})">{{album.artistName}}</a></p>

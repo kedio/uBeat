@@ -17,8 +17,6 @@ angular.module('echonest', ['services'])
                         if(biographyToReturn == ''){
                             biographyToReturn = data.response.biographies[0];
                         }
-                        var paragraphs = biographyToReturn.text.paragraphs();
-                        console.log(biographyToReturn.text);
                         callback(biographyToReturn);
                     })
                 },
@@ -26,13 +24,13 @@ angular.module('echonest', ['services'])
                 var artistNameWithoutSpace = artistName.split(' ').join('+');
                 $http.get('http://developer.echonest.com/api/v4/artist/images?api_key=8MQ94F3HBSS6FA665&name='
                     + artistNameWithoutSpace +'&license=cc-by-sa').success(function(data){
-                    var imageURL = '';
+                    var imageURL = undefined;
                     angular.forEach(data.response.images, function(image){
                         if(image.license.attribution == 'last.fm'){
                             imageURL = image.url;
                         }
                     })
-                    if(imageURL == ''){
+                    if(imageURL == undefined && data.response.images.length != 0){
                         imageURL = data.response.images[0].url;
                     }
                     callback(imageURL);
@@ -46,20 +44,6 @@ angular.module('echonest', ['services'])
                     + artistNameWithoutSpace +'&results=8').success(function(data){
                     var ubeatArtists = [];
                     var ubeatArtistsReceived= 0;
-                    /*for(var i = 0; i < data.response.artists.length; i++){
-                        APIService.search(artist.name, 'artists').success(function(data){
-                            for(var i=0 ; i < data.results; i++){
-                                if(artist.name == result.artistName){
-                                    ubeatArtists.push(result);
-                                }
-                            }
-                            /*angular.forEach(data.results, function(result){
-                                if(artist.name == result.artistName){
-                                    ubeatArtists.push(result);
-                                }
-                            })
-                        });
-                    }*/
                     angular.forEach(data.response.artists, function(artist){
                         APIService.search(artist.name, 'artists').success(function(data){
                             angular.forEach(data.results, function(result){

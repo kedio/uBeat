@@ -1,4 +1,4 @@
-angular.module('artistlist', [])
+angular.module('artistlist', ['echonest'])
 
 .directive('artistlist', function(){
         return{
@@ -12,8 +12,23 @@ angular.module('artistlist', [])
 
 .factory('artistlistFactory', function(){
         return {
-            create: function(name, artists){
-                return new ArtistList(name, artists);
+            create: function(artists){
+                return new ArtistList(artists);
             }
         }
-    });
+    })
+
+.controller('artistListController', function($scope, echonest){
+    $scope.$watch('artistlist', function(newArtistlist){
+        if(newArtistlist == undefined){
+            return;
+        }
+        angular.forEach(newArtistlist.artists, function(artist){
+            if(artist.artistImage == undefined){
+                echonest.getArtistImage(artist.artistName, function(artistImage){
+                   artist.artistImage = artistImage;
+                })
+            }
+        })
+    })
+});

@@ -97,7 +97,7 @@ playlistsModule.controller('playlistDetailsController', function($scope, $state,
                 AudioService.registerTrack(track);
             });
             $scope.playlist = data;
-            $scope.tracklist = tracklistFactory.create('Tracks',data.tracks)
+            $scope.tracklist = tracklistFactory.create(data.tracks)
                 .showName().showArtist().showAlbum().showLength().allowPlay().allowDelete();
         });
     }

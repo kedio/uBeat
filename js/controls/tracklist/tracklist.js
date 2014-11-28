@@ -1,8 +1,7 @@
-function Tracklist(name, tracks){
+function Tracklist(tracks){
     this.name = name;
     this.tracks = tracks;
     this.settings = {
-        showListName: false,
         showTrackNo: false,
         showName: false,
         showArtist: false,
@@ -11,11 +10,6 @@ function Tracklist(name, tracks){
         allowPlay: false,
         allowAddToPlaylist: false,
         allowDelete: false
-    };
-
-    this.showListName = function(){
-        this.settings.showListName = true;
-        return this;
     };
 
     this.showTrackNo = function(){
