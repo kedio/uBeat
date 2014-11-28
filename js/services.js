@@ -62,7 +62,7 @@ services.factory('APIService', function($http) {
 
         search: function(queryString, option){
             if(option == 'all'){
-                return $http.get(api.base + '/search?q=' + queryString);
+                return $http.get(api.base + '/search?q=' + queryString +'&limit=20');
             }
             else{
                 return $http.get(api.base +'/search/' + option + '?q=' + queryString);

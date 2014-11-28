@@ -1,4 +1,4 @@
-var searchModule = angular.module('search', ['ui.router', 'services','albumlistModule','tracklist','artistlist']);
+var searchModule = angular.module('search', ['ui.router', 'services','albumlistModule','tracklist','artistlist','userslist']);
 
 searchModule.config(function($stateProvider) {
     $stateProvider.state('private.search', {
@@ -11,41 +11,55 @@ searchModule.config(function($stateProvider) {
 });
 
 searchModule.controller('searchController', function($scope, $stateParams, $location, APIService, tracklistFactory, albumlistFactory, artistlistFactory) {
-console.log($stateParams);
 
-
-
-    resetResults();
-    $scope.searchOptions = ['all', 'artists', 'albums', 'tracks'];
-    $scope.selectedOption = 'all';
-    $scope.search = function(){
-        console.log($scope.queryString + ': ' + $scope.selectedOption);
+    function searchMusic(){
         APIService.search($scope.queryString, $scope.selectedOption).success(function(data){
-            resetResults();
-            angular.forEach(data.results, function(result){
-                if(result.wrapperType == undefined){
-                    $scope.resultUsers.push(result);
+            resetMusic();
+            for(var i = 0; i < data.results.length; i++){
+                switch(data.results[i].wrapperType){
+                    case 'track': $scope.resultTracks.push(data.results[i]);
+                        break;
+                    case 'collection' : $scope.resultAlbums.push(data.results[i]);
+                        break;
+                    case 'artist' : $scope.resultArtists.push(data.results[i]);
+                        break;
                 }
-                else{
-                    switch(result.wrapperType){
-                        case 'track': $scope.resultTracks.push(result);
-                            break;
-                        case 'collection': $scope.resultAlbums.push(result);
-                            break;
-                        case 'artist': $scope.resultArtists.push(result);
-                            break;
-                    }
-                }
-
-            });
+            }
             $scope.tracklist = tracklistFactory.create($scope.resultTracks)
                 .showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
             $scope.albumlist = albumlistFactory.create($scope.resultAlbums);
             $scope.artistlist = artistlistFactory.create( $scope.resultArtists);
         })
+    }
+
+    function searchUsers(){
+        APIService.search($scope.queryString, 'users').success(function(data){
+            $scope.resultUsers = data.splice(0,10);
+        })
+    }
+
+    console.log($stateParams);
+
+    resetMusic();
+    $scope.searchOptions = ['all', 'artists', 'albums', 'tracks','users'];
+    $scope.selectedOption = 'all';
+
+    $scope.search = function(){
+        console.log($scope.queryString + ': ' + $scope.selectedOption);
+        if($scope.selectedOption == 'all'){
+            searchMusic();
+            searchUsers();
+        }
+        else if($scope.selectedOption == 'users'){
+            searchUsers();
+        }
+        else{
+            searchMusic();
+        }
+
     };
 
-    function resetResults(){
+    function resetMusic(){
         $scope.resultArtists = [];
         $scope.resultAlbums = [];
         $scope.resultTracks = [];
