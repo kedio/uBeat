@@ -53,10 +53,6 @@ services.factory('APIService', function($http) {
                 extendedTrack.audioObject = null;
                 extendedTracks.push(extendedTrack);
             }
-           /* angular.forEach(trackList, function(track){
-
-            });*/
-           // return $http.post(api.base + '/login', {email: email, password: password});
             return $http.put(api.base + '/playlists/' + playlistId, {name: playlistName, tracks: extendedTracks});
         },
 

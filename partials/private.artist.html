@@ -26,7 +26,13 @@
         </div>
     </div>
     <div class="grid-66">
-        <albumlist data="albumList"></albumlist>
+        <div class="grid-container">
+            <h2 ng-click="activateTab('albums')" class="grid-33">Albums</h2>
+            <h2 ng-click="activateTab('biography')" class="grid-33">Biography</h2>
+            <h2 ng-click="activateTab('related')" class="grid-33">Related</h2>
+        </div>
+        <albumlist ng-if="activeTab == 'albums'" data="albumList"></albumlist>
+        <biography ng-if="activeTab == 'biography'" text="artist.biography.text" url="artist.biography.url"></biography>
+        <artistlist ng-if="activeTab == 'related'" data="similarArtistsList"></artistlist>
     </div>
 </div>
-{{artist.biography}}

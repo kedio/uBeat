@@ -40,7 +40,7 @@ console.log($stateParams);
             });
             $scope.tracklist = tracklistFactory.create('Tracks',$scope.resultTracks)
                 .showListName().showName().showArtist().showAlbum().showLength().allowPlay().allowAddToPlaylist();
-            $scope.albumlist = albumlistFactory.create('Albums', $scope.resultAlbums);
+            $scope.albumlist = albumlistFactory.create('Albums', $scope.resultAlbums).showName();
             $scope.artistlist = artistlistFactory.create('Artists', $scope.resultArtists);
         })
     };
