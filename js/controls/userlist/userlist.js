@@ -1,4 +1,4 @@
-angular.module('userslist', [])
+angular.module('userslist', ['gravatar'])
 
     .directive('userslist', function(){
         return{
@@ -10,14 +10,14 @@ angular.module('userslist', [])
         };
     })
 
-    .controller('userslistController', function($scope, echonest){
+    .controller('userslistController', function($scope, gravatar){
         $scope.$watch('users', function(newusers){
             if(newusers == undefined){
                 return;
             }
             angular.forEach(newusers, function(user){
                 if(user.userPicture == undefined){
-                    user.userPicture = 'http://executivewinners.ca/wp-content/uploads/2013/11/generic_user_male.jpg'
+                    user.userPicture = gravatar.getAvatar(user.email);
                 }
             })
         })

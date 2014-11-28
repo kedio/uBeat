@@ -41,7 +41,7 @@ angular.module('echonest', ['services'])
             getSimilar: function(artistName, callback){
                 var artistNameWithoutSpace = artistName.split(' ').join('+');
                 $http.get('http://developer.echonest.com/api/v4/artist/similar?api_key=8MQ94F3HBSS6FA665&name='
-                    + artistNameWithoutSpace +'&results=8').success(function(data){
+                    + artistNameWithoutSpace +'&results=6').success(function(data){
                     var ubeatArtists = [];
                     var ubeatArtistsReceived= 0;
                     angular.forEach(data.response.artists, function(artist){
@@ -53,7 +53,7 @@ angular.module('echonest', ['services'])
 
                             })
                             ubeatArtistsReceived++;
-                            if(ubeatArtistsReceived == 8){
+                            if(ubeatArtistsReceived == 6){
                                 callback(ubeatArtists);
                             }
                         });

@@ -1,7 +1,11 @@
-var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist', 'album', 'playlists', 'user','search','tracks']);
+var ubeatcore = angular.module('ubeatcore', ['ui.router', 'artist', 'album', 'playlists', 'user','search','tracks','gravatar']);
 
-ubeatcore.controller('mainController', function($scope, $state, $location) {
+ubeatcore.controller('mainController', function($scope, $state, $location, gravatar) {
     $scope.state = $state;
+
+    $scope.$watch('user', function(newUser){
+        newUser.userPicture = gravatar.getAvatar(newUser.email);
+    })
 
     $scope.search = function(query) {
         $location.path('/search').search({q: query});

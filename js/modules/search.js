@@ -45,6 +45,7 @@ searchModule.controller('searchController', function($scope, $stateParams, $loca
     $scope.selectedOption = 'all';
 
     $scope.search = function(){
+        resetMusic();
         console.log($scope.queryString + ': ' + $scope.selectedOption);
         if($scope.selectedOption == 'all'){
             searchMusic();
