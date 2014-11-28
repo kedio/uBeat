@@ -16,8 +16,6 @@ angular.module('biography', [])
             if(newText == undefined){
                 return;
             }
-            if(newText.length > 300){
-                $scope.text = newText.substring(0,900);
-            }
+            $scope.text = newText.paragraphs()[0];
         })
     })
