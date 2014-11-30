@@ -47,7 +47,7 @@ albumModule.controller('addToPlaylistController', function($scope, $rootScope, $
         APIService.updatePlaylist($scope.selectedPlaylist.playlist.id,$scope.selectedPlaylist.playlist.name, $scope.selectedPlaylist.playlist.tracks);
 
         $modalInstance.close();
-    }
+    };
 
     $scope.cancel = function() {
         $modalInstance.dismiss();
