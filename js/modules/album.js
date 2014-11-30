@@ -30,8 +30,13 @@ albumModule.controller('addToPlaylistController', function($scope, $rootScope, $
     $scope.selectedPlaylist = {};
 
     APIService.getPlaylists().success(function (data) {
-        $scope.playlists = data;
-    })
+        $scope.playlists = data.findAll(function(playlist) {
+            if(playlist.owner) {
+                return playlist.owner.email === $rootScope.user.email;
+            }
+            return false;
+        });
+    });
 
     $scope.confirm = function() {
 

@@ -3,11 +3,6 @@
 </div>
 <div class="modal-body">
     <ul>
-        <!--li ng-repeat="playlist in playlists"-->
-            <!--select ng-model="selectedPlaylist.id">
-                <option ng-repeat="playlist in playlists" value="{{playlist.id}}">{{playlist.name | limitTo:50}}</option>
-            </select-->
-
         <select ng-model="selectedPlaylist.playlist" ng-options="playlist.name for playlist in playlists | orderBy: 'name'">
             <option value="">-- choose playlist --</option>
         </select>
