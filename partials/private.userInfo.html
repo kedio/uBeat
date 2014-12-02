@@ -1,0 +1,21 @@
+<div class="section-header">
+    <div class="icon">
+        <i class="fa fa-user"></i>
+    </div>
+    <h2>User: {{userInfo.name}}</h2>
+</div>
+
+<div class="grid-container">
+    <div class="grid-50 tablet-grid-50" ng-repeat="playlist in userPlaylists">
+        <playlist-panel playlist="playlist"></playlist-panel>
+    </div>
+</div>
+
+<div ng-repeat="user in userInfo.following">
+    <div>
+        {{user}}
+    </div>
+</div>
+
+<button ng-click="follow(userInfo.id)">follow</button>
+<button ng-click="unfollow(userInfo.id)">unfollow</button>

@@ -1,4 +1,4 @@
-var playlistsModule = angular.module('playlists', ['ui.router', 'services', 'ngAudio', 'Audio','tracklist']);
+var playlistsModule = angular.module('playlists', ['ui.router', 'services', 'ngAudio', 'Audio','tracklist', 'playlistPanelModule']);
 
 playlistsModule.config(function($stateProvider) {
     $stateProvider.state('private.playlists', {
@@ -15,17 +15,22 @@ playlistsModule.config(function($stateProvider) {
 
 });
 
-playlistsModule.controller('playlistsController', function($scope, $rootScope, $state, $stateParams, APIService, $modal, AudioService) {
+playlistsModule.controller('playlistsController', function($scope, $rootScope, $state, $stateParams, APIService, $modal, playlistPanelFactory) {
 
     var loadingPlaylistsList = function(){
         APIService.getPlaylists().success(function (data) {
-            $scope.myPlaylists = data.findAll(function(playlist) {
-                if(playlist.owner) {
-                    return playlist.owner.email === $rootScope.user.email;
-                }
-                return false;
+            $scope.myPlaylists = $.map($(data), function(playlist) {
+                if(playlist.owner && playlist.owner.email === $rootScope.user.email)
+                    return playlistPanelFactory.create(playlist).canBePlayed().canBeEdited().canBeDeleted();
+                else
+                    return null;
             });
-            $scope.otherPlaylists = data;
+            $scope.otherPlaylists = $.map($(data), function(playlist) {
+                if(playlist.owner && playlist.owner.email != $rootScope.user.email)
+                    return playlistPanelFactory.create(playlist).canBePlayed();
+                else
+                    return null;
+            });
         });
     };
 
@@ -65,28 +70,6 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
         });
     }
 
-    $scope.togglePlaylist = function(playlist) {
-        if(this.isPlaylistPlaying(playlist)){
-            AudioService.stopPlaylist();
-        }
-        else{
-            if(playlist.tracks.length){
-                AudioService.playPlaylist(playlist);
-            }
-        }
-    }
-
-    $scope.isPlaylistPlaying = function(playlist){
-        var isPlaying = false;
-        angular.forEach(playlist.tracks, function(track){
-            if("audioObject" in track){
-                if(!track.audioObject.paused){
-                    isPlaying = true;
-                }
-            }
-        });
-        return isPlaying;
-    }
 });
 
 playlistsModule.controller('playlistDetailsController', function($scope, $state, $stateParams, APIService, ngAudio, AudioService, tracklistFactory){

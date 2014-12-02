@@ -30,6 +30,18 @@ services.factory('APIService', function($http) {
             return $http.get(api.base + '/playlists/' + playlistId);
         },
 
+        getUserInfo: function(userId){
+            return $http.get(api.base + '/users/' + userId);
+        },
+
+        followUser: function(userId){
+            return $http.post(api.base + '/follow', {id: userId});
+        },
+
+        unfollowUser: function(userId){
+            return $http.delete(api.base + '/follow/' + userId);
+        },
+
         deleteTrackFromPlayList:function(playlistId, trackId){
             return $http.delete(api.base + '/playlists/' + playlistId + '/tracks/' + trackId);
         },
@@ -67,9 +79,7 @@ services.factory('APIService', function($http) {
             else{
                 return $http.get(api.base +'/search/' + option + '?q=' + queryString);
             }
-
         }
-
     }
 });
 

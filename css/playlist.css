@@ -20,7 +20,8 @@
     line-height: 2;
 }
 
-.playlist-description p {
+.playlist-description p, .playlist-description p a {
+    text-transform: inherit;
     margin-bottom: 5px;
     font-size: 13px;
     line-height: 1;

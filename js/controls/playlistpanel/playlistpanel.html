@@ -1,0 +1,13 @@
+<div class="panel" ng-controller="playlistPanelController">
+    <div class="playlist-image"><a href="/playlists/{{playlist.id}}"><img ng-src="{{playlist.tracks[0].artworkUrl100}}"/></a></div>
+    <div class="playlist-description">
+        <a href="/playlists/{{playlist.id}}">{{playlist.name}}</a>
+        <p>Author: <a href="/userinfo/{{playlist.owner.id}}"><span class="text-emphasis">{{playlist.owner.name}}</span></a></p>
+        <p>Number of tracks: <span class="text-emphasis">{{playlist.tracks.length}}</span></p>
+    </div>
+    <div class="playlist-actions btn-group pull-right">
+        <i ng-hide="playlist.settings.canPlay == false" class="fa clickable" ng-class="{'fa-stop' : isPlaylistPlaying(playlist) == true, 'fa-play-circle-o': isPlaylistPlaying(playlist) == false}" ng-click="togglePlaylist(playlist)"></i>
+        <i ng-hide="playlist.settings.canDelete == false" class="fa fa-times-circle-o clickable" ng-click="deletePlaylist(playlist)"></i>
+        <i ng-hide="playlist.settings.canEdit == false" class="fa fa-pencil clickable" ng-click="renamePlaylist(playlist)"></i>
+    </div>
+</div>
