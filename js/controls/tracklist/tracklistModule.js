@@ -50,6 +50,22 @@ angular.module('tracklist',['ui.router','services'])
             }
         });
     };
+        $scope.addAllToPlaylist= function(){
+            $scope.tracksToAdd = [];
+            angular.forEach($scope.tracklist.tracks, function(track){
+                $scope.tracksToAdd.push(track);
+            });
+            $modal.open({
+                templateUrl: "/partials/private.album.addToPlaylist.html",
+                controller:"addToPlaylistController",
+                resolve:{
+                    tracks: function() {
+                        return $scope.tracksToAdd;
+                    }
+                }
+            });
+
+        };
 
     $scope.toggleSelection = function(selected) {
         angular.forEach($scope.tracklist.tracks, function(track) {
