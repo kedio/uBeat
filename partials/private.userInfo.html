@@ -4,18 +4,42 @@
     </div>
     <h2>User: {{userInfo.name}}</h2>
 </div>
+<div class="user-information">
+    <p><span>Email: </span>{{userInfo.email}}</p>
+    <div ng-hide="!canFollow()" class="green-btn clickable" ng-click="follow(userInfo.id)">Follow</div>
+    <div ng-hide="canFollow() || isCurrentUser()"class="red-btn clickable" ng-click="unfollow(userInfo.id)">Unfollow</div>
+</div>
 
-<div class="grid-container">
+<div class="section-header" ng-hide="userPlaylists.length == 0">
+    <div class="icon">
+        <i class="fa fa-list"></i>
+    </div>
+    <h2>Playlists</h2>
+</div>
+<div class="grid-container" ng-hide="userPlaylists.length == 0">
     <div class="grid-50 tablet-grid-50" ng-repeat="playlist in userPlaylists">
         <playlist-panel playlist="playlist"></playlist-panel>
     </div>
 </div>
 
-<div ng-repeat="user in userInfo.following">
-    <div>
-        {{user}}
+<div class="section-header" ng-hide="userInfo.following.length == 0">
+    <div class="icon">
+        <i class="fa fa-group"></i>
     </div>
+    <h2>Friends</h2>
 </div>
+<table ng-hide="userInfo.following.length == 0">
+    <thead>
+    <tr>
+        <th width="100px">Name</th>
+        <th width="100px">Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="user in userInfo.following">
+        <td><a href="/userinfo/{{user.id}}">{{user.name}}</a></td>
+        <td>{{user.email}}</td>
+    </tr>
+    </tbody>
+</table>
 
-<button ng-click="follow(userInfo.id)">follow</button>
-<button ng-click="unfollow(userInfo.id)">unfollow</button>
