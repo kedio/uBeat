@@ -21,7 +21,7 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
         APIService.getPlaylists().success(function (data) {
             $scope.myPlaylists = $.map($(data), function(playlist) {
                 if(playlist.owner && playlist.owner.email === $rootScope.user.email)
-                    return playlistPanelFactory.create(playlist).canBePlayed().canBeEdited().canBeDeleted();
+                    return playlistPanelFactory.create(playlist, createDeleteCallBack(playlist)).canBePlayed().canBeEdited().canBeDeleted();
                 else
                     return null;
             });
@@ -51,23 +51,12 @@ playlistsModule.controller('playlistsController', function($scope, $rootScope, $
         })
     };
 
-    $scope.renamePlaylist = function(playlist) {
-        $modal.open({
-            templateUrl: "/partials/private.playlists.renamePlaylist.html",
-            controller: 'playlistRenameController',
-            resolve:  {
-                playlist: function() {
-                    return playlist;
-                }
-            }
-        })
-    };
-
-    $scope.deletePlaylist = function(playlist) {
-        APIService.deletePlaylist(playlist.id).success(function() {
-            $scope.myPlaylists.remove(playlist);
-            $scope.otherPlaylists.remove(playlist);
-        });
+    var createDeleteCallBack = function(playlist){
+        return function() {
+            var playlistToDelete = playlist;
+            $scope.myPlaylists.remove(playlistToDelete);
+            $scope.otherPlaylists.remove(playlistToDelete);
+        }
     }
 
 });

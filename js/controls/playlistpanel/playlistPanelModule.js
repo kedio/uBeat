@@ -12,13 +12,13 @@ angular.module('playlistPanelModule', ['ui.router', 'services'])
 
 .factory('playlistPanelFactory', function(){
     return {
-        create: function(playlist){
-            return new PlaylistPanel(playlist);
+        create: function(playlist, deleteCallBack){
+            return new PlaylistPanel(playlist, deleteCallBack);
         }
     }
 })
 
-.controller('playlistPanelController', function($scope, AudioService){
+.controller('playlistPanelController', function($scope, $modal, APIService, AudioService){
 
     $scope.togglePlaylist = function(playlist) {
         if(this.isPlaylistPlaying(playlist)){
@@ -42,4 +42,23 @@ angular.module('playlistPanelModule', ['ui.router', 'services'])
         });
         return isPlaying;
     }
+
+    $scope.renamePlaylist = function(playlist) {
+        $modal.open({
+            templateUrl: "/partials/private.playlists.renamePlaylist.html",
+            controller: 'playlistRenameController',
+            resolve:  {
+                playlist: function() {
+                    return playlist;
+                }
+            }
+        })
+    };
+
+    $scope.deletePlaylist = function(playlist) {
+        APIService.deletePlaylist(playlist.id).success(function() {
+            playlist.delete();
+        });
+    }
+
 });

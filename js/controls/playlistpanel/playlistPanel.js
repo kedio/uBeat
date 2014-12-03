@@ -1,12 +1,18 @@
-function PlaylistPanel(playlist){
+function PlaylistPanel(playlist, deleteCallBack){
     this.name = playlist.name;
+    this.id = playlist.id;
     this.owner = playlist.owner;
     this.tracks = playlist.tracks;
+    this.deleteCallBack = deleteCallBack;
     this.settings = {
         canEdit: false,
         canDelete: false,
         canPlay: false
     };
+
+    this.delete = function(){
+        this.deleteCallBack();
+    }
 
     this.canBeEdited = function() {
         this.settings.canEdit = true;
