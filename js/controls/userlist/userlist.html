@@ -1,9 +1,9 @@
 <div ng-controller="userslistController">
     <div class="grid-50 tablet-grid-50" ng-repeat="user in users" >
         <div class="panel">
-            <div class="album-image"><a ui-sref="private.user({userId: user.id})"><img class="panel-image" ng-src="{{user.userPicture}}"/></a></div>
+            <div class="album-image"><a ui-sref="private.userInfo({userId: user.id})"><img class="panel-image" ng-src="{{user.userPicture}}"/></a></div>
             <div class="album-description">
-                <p class="text-strong"><a ui-sref="private.user({userId: user.id})">{{user.name}}</a></p>
+                <p class="text-strong"><a ui-sref="private.userInfo({userId: user.id})">{{user.name}}</a></p>
             </div>
         </div>
     </div>

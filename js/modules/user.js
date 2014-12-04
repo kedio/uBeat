@@ -5,6 +5,10 @@ user.config(function($stateProvider)  {
         templateUrl: '/partials/public.login.html',
         controller: 'UserLoginController'
     });
+    $stateProvider.state('public.logout', {
+        url: '/logout',
+        controller: 'UserLogoutController'
+    });
 });
 
 
@@ -31,17 +35,15 @@ user.controller('UserLoginController', function UserController($scope, $location
     };
 });
 
-user.controller('UserLogoutController', ['$scope', '$location', '$window', 'UserService', 'AuthenticationService',
-    function UserLogoutController($scope, $location, $window, UserService, AuthenticationService) {
-        UserService.logOut().success(function(data) {
-            AuthenticationService.setAuthenticated(false);
-            delete $window.sessionStorage.token;
-        }).error(function(status, data) {
-            AuthenticationService.setAuthenticated(false);
-            delete $window.sessionStorage.token;
-            console.log(status);
-            console.log(data);
-        });
-        $location.path("/");
-    }
-]);
+user.controller('UserLogoutController', function($scope, $location, $window, APIService, AuthenticationService) {
+    APIService.logout().success(function() {
+        AuthenticationService.logout();
+        delete $window.sessionStorage.token;
+    }).error(function(status, data) {
+        AuthenticationService.logout();
+        delete $window.sessionStorage.token;
+        console.log(status);
+        console.log(data);
+    });
+    $location.path("/login");
+});

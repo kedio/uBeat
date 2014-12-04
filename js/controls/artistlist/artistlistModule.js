@@ -4,7 +4,8 @@ angular.module('artistlist', ['echonest'])
         return{
             restrict: 'E',
             scope:{
-                artists: '='
+                artists: '=',
+                ordered: '='
             },
             templateUrl: '/js/controls/artistlist/artistlist.html'
         };

@@ -4,4 +4,4 @@ angular.module('home',['echonest'])
         echonest.getTopHottt(function(artists){
             $scope.hotttArtists = artists;
         })
-    })
+    });

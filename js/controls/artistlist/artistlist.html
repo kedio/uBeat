@@ -1,9 +1,9 @@
 <div ng-controller="artistListController">
-    <div class="grid-50 tablet-grid-50" ng-repeat="artist in artists" >
+    <div class="grid-50 tablet-grid-50" ng-repeat="artist in artists">
         <div class="panel">
             <div class="album-image"><a ui-sref="private.artist({artistId: artist.artistId})"><img class="panel-image" ng-src="{{artist.artistImage}}"/></a></div>
             <div class="album-description">
-                <p class="text-strong"><a ui-sref="private.artist({artistId: artist.artistId})">{{artist.artistName}}</a></p>
+                <p class="text-strong"><span ng-show="ordered">{{$index + 1}}. </span><a ui-sref="private.artist({artistId: artist.artistId})">{{artist.artistName}}</a></p>
             </div>
         </div>
     </div>

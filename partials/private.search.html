@@ -7,15 +7,16 @@
         <h2>Search</h2>
     </div>
     <div class="grid-container">
-        <form name="searchForm" ng-submit="search()">
+        <form class="grid-100" name="searchForm" ng-submit="search()">
             <input type="text" ng-model="queryString" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 300, 'blur': 0} }" required>
             <select ng-model="selectedOption" ng-options="option for option in searchOptions">
             </select>
             <button type="submit" class="btn" ng-disabled="searchForm.$invalid">search</button>
+            <div ng-if="resultArtists.length == 0 && resultAlbums.length == 0 && resultTracks.length == 0 && resultUsers.length == 0" style="margin-top:10px;">
+                No search results.
+            </div>
         </form>
-        <div ng-if="resultArtists.length == 0 && resultAlbums.length == 0 && resultTracks.length == 0 && resultUsers.length == 0" style="margin-top:10px;">
-            Aucun résultat de recherche a afficher.
-        </div>
+
     </div>
 </div>
 

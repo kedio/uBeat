@@ -94,12 +94,14 @@ services.service('AuthenticationService', function($cookieStore, $rootScope) {
         return auth.isAuthenticated;
     };
 
+    this.logout = function() {
+        this.setAuthenticated(false);
+        auth.user = null;
+        $cookieStore.remove('user');
+        $rootScope.user = null;
+    };
     this.setAuthenticated = function(value) {
         auth.isAuthenticated = value;
-    };
-
-    this.getUser = function() {
-        return auth.user;
     };
 
     this.setUser = function(user) {
