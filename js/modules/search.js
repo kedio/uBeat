@@ -14,7 +14,6 @@ searchModule.controller('searchController', function($scope, $stateParams, $loca
 
     function searchMusic(){
         APIService.search($scope.queryString, $scope.selectedOption).success(function(data){
-            resetMusic();
             for(var i = 0; i < data.results.length; i++){
                 switch(data.results[i].wrapperType){
                     case 'track': $scope.resultTracks.push(data.results[i]);
@@ -39,13 +38,13 @@ searchModule.controller('searchController', function($scope, $stateParams, $loca
 
     console.log($stateParams);
 
-    resetMusic();
+    reset();
     $scope.searchOptions = ['all', 'artists', 'albums', 'tracks','users'];
     $scope.selectedOption = 'all';
-    $scope.resultUsers = [];
+
 
     $scope.search = function(){
-        resetMusic();
+        reset();
         console.log($scope.queryString + ': ' + $scope.selectedOption);
         if($scope.selectedOption == 'all'){
             searchMusic();
@@ -60,10 +59,11 @@ searchModule.controller('searchController', function($scope, $stateParams, $loca
 
     };
 
-    function resetMusic(){
+    function reset(){
         $scope.resultArtists = [];
         $scope.resultAlbums = [];
         $scope.resultTracks = [];
+        $scope.resultUsers = [];
     }
 
     if($location.search().type) {
