@@ -13,6 +13,10 @@ app.use('/fonts', express.static(__dirname + '/fonts'));
 app.use('/partials', express.static(__dirname + '/partials'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
+app.route('/:url(js|img|css|fonts|partials|bower_components)/*').get(function(req, res) {
+    res.status(404).end();
+});
+
 app.all('/*', function(req, res, next) {
     res.sendFile(__dirname + '/index.html');
 });
