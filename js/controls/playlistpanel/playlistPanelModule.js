@@ -6,7 +6,7 @@ angular.module('playlistPanelModule', ['ui.router', 'services'])
         scope:{
             playlist: '='
         },
-        templateUrl: '/js/controls/playlistpanel/playlistPanel.html'
+        templateUrl: '/js/controls/playlistpanel/playlistpanel.html'
     };
 })
 
