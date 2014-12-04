@@ -25,10 +25,11 @@ albumModule.controller('albumController', function($scope, $state, $stateParams,
 });
 
 
-albumModule.controller('addToPlaylistController', function($scope, $rootScope, $modalInstance, $state, APIService, tracks) {
+albumModule.controller('addToPlaylistController', function($scope, $rootScope, $modalInstance, $state, APIService, tracks, $timeout) {
     $scope.playlists = [];
     $scope.selectedPlaylist = {};
 
+    $scope.playlistsLoaded = false;
     APIService.getPlaylists().success(function (data) {
         $scope.playlists = data.findAll(function(playlist) {
             if(playlist.owner) {
@@ -36,7 +37,9 @@ albumModule.controller('addToPlaylistController', function($scope, $rootScope, $
             }
             return false;
         });
+        $scope.playlistsLoaded = true;
     });
+
 
     $scope.confirm = function() {
 
@@ -44,9 +47,16 @@ albumModule.controller('addToPlaylistController', function($scope, $rootScope, $
         console.log($scope.selectedPlaylist);
         $scope.selectedPlaylist.playlist.tracks = $scope.selectedPlaylist.playlist.tracks.concat(tracks);
 
-        APIService.updatePlaylist($scope.selectedPlaylist.playlist.id,$scope.selectedPlaylist.playlist.name, $scope.selectedPlaylist.playlist.tracks);
+        APIService.updatePlaylist($scope.selectedPlaylist.playlist.id,$scope.selectedPlaylist.playlist.name, $scope.selectedPlaylist.playlist.tracks).success(function() {
+            $scope.completedMessage = 'Successfully added!';
+            $timeout(function() {
+                $modalInstance.close();
+            }, 1200);
+        }).error(function() {
+            $modalInstance.close();
+        });
 
-        $modalInstance.close();
+
     };
 
     $scope.cancel = function() {

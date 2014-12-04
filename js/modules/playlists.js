@@ -109,6 +109,3 @@ playlistsModule.controller('playlistRenameController', function($scope, $rootSco
         $modalInstance.dismiss();
     };
 });
-
-
-

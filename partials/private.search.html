@@ -1,41 +1,76 @@
-<div class="grid-container">
-    <div class="grid-100">
+
+<div style="margin-bottom: 10px;">
+    <div class="section-header">
+        <div class="icon">
+            <i class="fa fa-search"></i>
+        </div>
         <h2>Search</h2>
+    </div>
+    <div class="grid-container">
         <form name="searchForm" ng-submit="search()">
             <input type="text" ng-model="queryString" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 300, 'blur': 0} }" required>
             <select ng-model="selectedOption" ng-options="option for option in searchOptions">
             </select>
             <button type="submit" class="btn" ng-disabled="searchForm.$invalid">search</button>
         </form>
+        <div ng-if="resultArtists.length == 0 && resultAlbums.length == 0 && resultTracks.length == 0 && resultUsers.length == 0" style="margin-top:10px;">
+            Aucun résultat de recherche a afficher.
+        </div>
     </div>
+</div>
 
-    <div ng-if="resultArtists.length == 0 && resultAlbums.length == 0 && resultTracks.length == 0 && resultUsers.length == 0">
-        Aucun résultat de recherche a afficher.
-    </div>
 
-    <div>
-        <div class="grid-100" style="padding:0">
-            <div ng-if="resultArtists.length != 0">
+
+<div>
+    <div style="padding:0">
+        <div ng-if="resultArtists.length != 0">
+            <div class="section-header">
+                <div class="icon">
+                    <i class="fa fa-group"></i>
+                </div>
                 <h2>Artists</h2>
-                <artistlist data="artistlist"></artistlist>
+            </div>
+            <div class="grid-container">
+                <artistlist artists="resultArtists"></artistlist>
             </div>
         </div>
-        <div class="grid-100" style="padding:0">
-            <div ng-if="resultAlbums.length != 0" ng-style="albumlist.height">
+    </div>
+    <div>
+        <div ng-if="resultAlbums.length != 0" ng-style="albumlist.height">
+            <div class="section-header">
+                <div class="icon">
+                    <i class="fa fa-music"></i>
+                </div>
                 <h2>Albums</h2>
+            </div>
+            <div class="grid-container">
                 <albumlist albums="resultAlbums"></albumlist>
             </div>
         </div>
-        <div class="grid-100" style="padding:0">
-            <div ng-if="resultTracks.length != 0">
+    </div>
+    <div>
+        <div ng-if="resultTracks.length != 0">
+            <div class="section-header">
+                <div class="icon">
+                    <i class="fa fa-list-ul"></i>
+                </div>
                 <h2>Tracks</h2>
+            </div>
+            <div class="grid-container">
                 <tracklist data="tracklist" ></tracklist>
             </div>
         </div>
+    </div>
 
-        <div class="grid-100" style="padding:0">
-            <div ng-if="resultUsers.length != 0">
+    <div>
+        <div ng-if="resultUsers.length != 0">
+            <div class="section-header">
+                <div class="icon">
+                    <i class="fa fa-user"></i>
+                </div>
                 <h2>Users</h2>
+            </div>
+            <div class="grid-container">
                 <userslist users="resultUsers" ></userslist>
             </div>
         </div>

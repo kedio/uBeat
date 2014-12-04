@@ -42,6 +42,7 @@ searchModule.controller('searchController', function($scope, $stateParams, $loca
     resetMusic();
     $scope.searchOptions = ['all', 'artists', 'albums', 'tracks','users'];
     $scope.selectedOption = 'all';
+    $scope.resultUsers = [];
 
     $scope.search = function(){
         resetMusic();
