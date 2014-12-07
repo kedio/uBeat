@@ -27,18 +27,7 @@
     </div>
     <h2>Friends</h2>
 </div>
-<table ng-hide="userInfo.following.length == 0">
-    <thead>
-    <tr>
-        <th width="100px">Name</th>
-        <th width="100px">Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="user in userInfo.following">
-        <td><a href="/userinfo/{{user.id}}">{{user.name}}</a></td>
-        <td>{{user.email}}</td>
-    </tr>
-    </tbody>
-</table>
+<div class="grid-container" ng-hide="userInfo.following.length == 0">
+    <userslist users="userInfo.following" current-user="currentUser"></userslist>
+</div>
 
