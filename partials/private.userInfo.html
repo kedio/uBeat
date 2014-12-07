@@ -6,8 +6,7 @@
 </div>
 <div class="user-information">
     <p><span>Email: </span>{{userInfo.email}}</p>
-    <div ng-hide="!canFollow()" class="green-btn clickable" ng-click="follow(userInfo.id)">Follow</div>
-    <div ng-hide="canFollow() || isCurrentUser()"class="red-btn clickable" ng-click="unfollow(userInfo.id)">Unfollow</div>
+    <follow-button user-info="userInfo" current-user="currentUser"></follow-button>
 </div>
 
 <div class="section-header" ng-hide="userPlaylists.length == 0">

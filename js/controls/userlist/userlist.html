@@ -4,6 +4,7 @@
             <div class="album-image"><a ui-sref="private.userInfo({userId: user.id})"><img class="panel-image" ng-src="{{user.userPicture}}"/></a></div>
             <div class="album-description">
                 <p class="text-strong"><a ui-sref="private.userInfo({userId: user.id})">{{user.name}}</a></p>
+                <follow-button user-info="user" current-user="currentUser"></follow-button>
             </div>
         </div>
     </div>
