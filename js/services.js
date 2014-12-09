@@ -72,6 +72,10 @@ services.factory('APIService', function($http) {
             return $http.get(api.base + '/logout');
         },
 
+        signup: function(name, email, password) {
+            return $http.post(api.base + '/signup', {name: name, email: email, password: password});
+        },
+
         search: function(queryString, option){
             if(option == 'all'){
                 return $http.get(api.base + '/search?q=' + queryString +'&limit=20');

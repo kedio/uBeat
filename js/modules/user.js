@@ -9,10 +9,15 @@ user.config(function($stateProvider)  {
         url: '/logout',
         controller: 'UserLogoutController'
     });
+    $stateProvider.state('public.signup', {
+        url: '/signup',
+        templateUrl: '/partials/public.signup.html',
+        controller: 'UserSignupController'
+    });
 });
 
 
-user.controller('UserLoginController', function UserController($scope, $location, $window, APIService, AuthenticationService) {
+user.controller('UserLoginController', function ($scope, $location, $window, APIService, AuthenticationService) {
     $scope.login = function(email, password) {
         if (email != null && password != null) {
             APIService.login(email, password).success(function(user) {
@@ -31,6 +36,21 @@ user.controller('UserLoginController', function UserController($scope, $location
             });
         } else {
             $scope.error = "Please enter both your email and your password"
+        }
+    };
+});
+
+user.controller('UserSignupController', function ($scope, $location, $window, APIService) {
+    $scope.signup = function(name, email, password) {
+        if (email != null && password != null && name != null) {
+            APIService.signup(name, email, password).success(function(user) {
+                $location.path("/login");
+            }).error(function(data, status) {
+                console.log(status);
+                $scope.error = "An error happened, please try again.";
+            });
+        } else {
+            $scope.error = "Please enter both your name, email and your password"
         }
     };
 });

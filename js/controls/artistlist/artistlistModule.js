@@ -7,7 +7,8 @@ angular.module('artistlist', ['echonest'])
                 artists: '=',
                 ordered: '='
             },
-            templateUrl: '/js/controls/artistlist/artistlist.html'
+            templateUrl: '/js/controls/artistlist/artistlist.html',
+            controller: 'artistListController'
         };
     })
 
