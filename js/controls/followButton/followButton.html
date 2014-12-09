@@ -1,0 +1,4 @@
+<div ng-controller="followButtonController">
+    <div ng-show="canFollow()" class="green-btn clickable" ng-click="follow(userInfo.id)">Follow</div>
+    <div ng-show="canUnfollow()" class="red-btn clickable" ng-click="unfollow(userInfo.id)">Unfollow</div>
+</div>

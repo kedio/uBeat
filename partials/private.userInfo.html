@@ -6,8 +6,7 @@
 </div>
 <div class="user-information">
     <p><span>Email: </span>{{userInfo.email}}</p>
-    <div ng-hide="!canFollow()" class="green-btn clickable" ng-click="follow(userInfo.id)">Follow</div>
-    <div ng-hide="canFollow() || isCurrentUser()"class="red-btn clickable" ng-click="unfollow(userInfo.id)">Unfollow</div>
+    <follow-button user-info="userInfo" current-user="currentUser"></follow-button>
 </div>
 
 <div class="section-header" ng-hide="userPlaylists.length == 0">
@@ -28,18 +27,7 @@
     </div>
     <h2>Friends</h2>
 </div>
-<table ng-hide="userInfo.following.length == 0">
-    <thead>
-    <tr>
-        <th width="100px">Name</th>
-        <th width="100px">Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="user in userInfo.following">
-        <td><a href="/userinfo/{{user.id}}">{{user.name}}</a></td>
-        <td>{{user.email}}</td>
-    </tr>
-    </tbody>
-</table>
+<div class="grid-container" ng-hide="userInfo.following.length == 0">
+    <userslist users="userInfo.following" current-user="currentUser"></userslist>
+</div>
 

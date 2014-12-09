@@ -1,4 +1,4 @@
-var userInfoModule = angular.module('userInfo', ['ui.router', 'services']);
+var userInfoModule = angular.module('userInfo', ['ui.router', 'services', 'followButtonModule']);
 
 userInfoModule.config(function($stateProvider) {
     $stateProvider.state('private.userInfo', {
@@ -24,39 +24,5 @@ userInfoModule.controller('userInfoController', function($scope, $stateParams, A
                 return null;
         });
     });
-
-    $scope.canFollow = function(){
-        return !$scope.isCurrentUser() && !inCurrentUserFollowList();
-    }
-
-    $scope.isCurrentUser = function(){
-        if($scope.userInfo && $scope.currentUser)
-            return $scope.userInfo.id == $scope.currentUser.id;
-        else
-            return false;
-    }
-
-    var inCurrentUserFollowList = function() {
-        var inFollowList = false;
-        if($scope.userInfo && $scope.currentUser){
-            $scope.currentUser.following.forEach(function(followingUser){
-                if(followingUser.id == $scope.userInfo.id)
-                    inFollowList = true;
-            });
-        }
-        return inFollowList;
-    }
-
-    $scope.follow = function(userId){
-        APIService.followUser(userId).success(function (data, status, headers, config){
-            $scope.currentUser.following = data.following
-        });
-    }
-
-    $scope.unfollow = function(userId){
-        APIService.unfollowUser(userId).success(function (data, status, headers, config){
-            $scope.currentUser.following = data.following
-        });
-    }
 
 });
