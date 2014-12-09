@@ -66,6 +66,10 @@
 	color: darkred;
 }
 
+.login-container h4.success {
+	color: darkgreen;
+}
+
 .login-container img{
 	max-width: 100%;
 }

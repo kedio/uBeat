@@ -6,6 +6,7 @@
         <div class="login-body">
             <h4>Sign in to your account</h4>
             <h4 class="error" ng-show="error">{{error}}</h4>
+            <h4 class="success" ng-show="success">{{success}}</h4>
             <form>
                 <div>
                     <input type="text" class="form-control" placeholder="Email" ng-model="email">
@@ -16,7 +17,10 @@
 
                 <button class="login" ng-click="login(email, password)">login <i class="fa fa-angle-right"></i></button>
             </form>
-            <a class="login" href="/signup">signup <i class="fa fa-angle-right"></i></a>
+            <div class="clearfix">
+                <a class="login" href="/signup">Not a member? signup <i class="fa fa-angle-right"></i></a>
+            </div>
+
 
         </div>
     </div>

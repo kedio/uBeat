@@ -17,12 +17,13 @@ user.config(function($stateProvider)  {
 });
 
 
-user.controller('UserLoginController', function ($scope, $location, $window, APIService, AuthenticationService) {
+user.controller('UserLoginController', function ($scope, $rootScope, $location, $window, APIService, AuthenticationService) {
     $scope.login = function(email, password) {
         if (email != null && password != null) {
             APIService.login(email, password).success(function(user) {
                 console.log('success login');
                 $scope.error = false;
+                $rootScope.success = false;
                 AuthenticationService.setAuthenticated(true);
                 AuthenticationService.setUser(user);
                 $location.path("/home");
@@ -40,10 +41,11 @@ user.controller('UserLoginController', function ($scope, $location, $window, API
     };
 });
 
-user.controller('UserSignupController', function ($scope, $location, $window, APIService) {
+user.controller('UserSignupController', function ($scope, $rootScope, $location, $window, APIService) {
     $scope.signup = function(name, email, password) {
         if (email != null && password != null && name != null) {
             APIService.signup(name, email, password).success(function(user) {
+                $rootScope.success = "Your account was created successfully. Now you can login by entering your credentials.";
                 $location.path("/login");
             }).error(function(data, status) {
                 console.log(status);
@@ -55,13 +57,15 @@ user.controller('UserSignupController', function ($scope, $location, $window, AP
     };
 });
 
-user.controller('UserLogoutController', function($scope, $location, $window, APIService, AuthenticationService) {
+user.controller('UserLogoutController', function($scope, $rootScope, $location, $window, APIService, AuthenticationService) {
     APIService.logout().success(function() {
         AuthenticationService.logout();
         delete $window.sessionStorage.token;
+        $rootScope.success = "You have been logged out successfully.";
     }).error(function(status, data) {
         AuthenticationService.logout();
         delete $window.sessionStorage.token;
+        $rootScope.success = "You have been logged out successfully.";
         console.log(status);
         console.log(data);
     });

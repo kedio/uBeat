@@ -5,7 +5,7 @@ searchModule.config(function($stateProvider) {
         url: "/search",
         templateUrl: "/partials/private.search.html",
         controller: 'searchController',
-        params: ['q', 'type']
+        params: {q: null, type: null}
     });
 
 });
