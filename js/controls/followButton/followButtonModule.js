@@ -14,11 +14,11 @@ angular.module('followButtonModule', ['ui.router', 'services'])
 .controller('followButtonController', function($scope, APIService){
 
     $scope.canFollow = function(){
-        return !$scope.isCurrentUser() && !inCurrentUserFollowList();
+        return $scope.currentUser && !$scope.isCurrentUser() && !inCurrentUserFollowList();
     }
 
     $scope.canUnfollow = function() {
-        return !$scope.isCurrentUser() && inCurrentUserFollowList();
+        return $scope.currentUser && !$scope.isCurrentUser() && inCurrentUserFollowList();
     }
 
     $scope.isCurrentUser = function(){

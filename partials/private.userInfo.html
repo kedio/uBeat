@@ -6,7 +6,7 @@
 </div>
 <div class="user-information">
     <p><span>Email: </span>{{userInfo.email}}</p>
-    <follow-button user-info="userInfo" current-user="currentUser"></follow-button>
+    <follow-button ng-show="currentUser" user-info="userInfo" current-user="currentUser"></follow-button>
 </div>
 
 <div class="section-header" ng-hide="userPlaylists.length == 0">
