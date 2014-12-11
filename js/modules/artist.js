@@ -20,7 +20,7 @@ artistModule.controller('artistController', function($scope, $state,$stateParams
 
             echonest.getArtistImage($scope.artist.artistName, function(artistImage){
                 if(artistImage == undefined){
-                    $scope.artist.artistImage = $scope.albumList.albums[0].artworkUrl100;
+                    $scope.artist.artistImage = $scope.artistAlbums[0].artworkUrl100;
                 }
                 else{
                     $scope.artist.artistImage = artistImage;

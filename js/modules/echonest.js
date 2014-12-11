@@ -61,7 +61,7 @@ angular.module('echonest', ['services'])
                             imageURL = image.url;
                         }
                     })
-                    if(imageURL == undefined && data.response.images.length != 0){
+                    if(imageURL == undefined && data.responses && data.response.images.length != 0){
                         imageURL = data.response.images[0].url;
                     }
                     callback(imageURL);
