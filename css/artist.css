@@ -24,3 +24,7 @@
     font-size: 13px;
     line-height: 1;
 }
+
+h2.active{
+    color: #428BCA;
+}
