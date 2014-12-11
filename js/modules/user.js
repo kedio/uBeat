@@ -19,6 +19,7 @@ user.config(function($stateProvider)  {
 
 user.controller('UserLoginController', function ($scope, $rootScope, $location, $window, APIService, AuthenticationService) {
     $scope.login = function(email, password) {
+        $rootScope.success = false;
         if (email != null && password != null) {
             APIService.login(email, password).success(function(user) {
                 console.log('success login');

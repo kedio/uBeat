@@ -4,7 +4,9 @@ ubeatcore.controller('mainController', function($scope, $state, $location, grava
     $scope.state = $state;
 
     $scope.$watch('user', function(newUser){
-        newUser.userPicture = gravatar.getAvatar(newUser.email);
+        if(newUser){
+            newUser.userPicture = gravatar.getAvatar(newUser.email);
+        }
     });
 
     $scope.search = function(query) {

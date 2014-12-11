@@ -1,57 +1,94 @@
-var services = angular.module('services', ['ngCookies']);
+var services = angular.module('services', ['ngCookies', 'ui.bootstrap']);
 var api = {
     //base: "http://localhost:3000"
     base: "https://ubeat.herokuapp.com"
 };
 
-services.factory('APIService', function($http) {
+services.factory('APIService', function($http, $modal) {
+    var showErrorModal = function(errorMessage){
+        $modal.open({
+            templateUrl: "/partials/private.errorModal.html",
+            controller: function($scope, $modalInstance){
+                $scope.message = errorMessage;
+                $scope.ok = function(){
+                    $modalInstance.close();
+                }
+            }
+        });
+    };
+
     return {
+
         getArtist: function(id) {
-            return $http.get(api.base + '/artists/' + id);
+            return $http.get(api.base + '/artists/' + id).error(function() {
+                showErrorModal('Could not get artist.');
+            });
         },
 
         getAlbum:function(id){
-            return $http.get(api.base + '/albums/' + id);
+            return $http.get(api.base + '/albums/' + id).error(function() {
+                showErrorModal('Could not get album.');
+            });
         },
 
         getAlbumsForArtist: function(artistId){
-            return $http.get(api.base + '/artists/' + artistId + '/albums/')
+            return $http.get(api.base + '/artists/' + artistId + '/albums/').error(function() {
+                showErrorModal('Could not get albums.');
+            });
         },
 
         getAlbumsTracks: function(albumId){
-            return $http.get(api.base + '/albums/' + albumId + '/tracks');
+            return $http.get(api.base + '/albums/' + albumId + '/tracks').error(function() {
+                showErrorModal('Could not get album tracks');
+            });
         },
 
         getPlaylists: function(){
-            return $http.get(api.base + '/playlists')
+            return $http.get(api.base + '/playlists').error(function() {
+                showErrorModal('Could not get playlists.');
+            })
         },
 
         getPlaylistDetails:function(playlistId){
-            return $http.get(api.base + '/playlists/' + playlistId);
+            return $http.get(api.base + '/playlists/' + playlistId).error(function() {
+                showErrorModal('Could not get playlist details.');
+            });
         },
 
         getUserInfo: function(userId){
-            return $http.get(api.base + '/users/' + userId);
+            return $http.get(api.base + '/users/' + userId).error(function() {
+                showErrorModal('Could not get user profile.');
+            });
         },
 
         followUser: function(userId){
-            return $http.post(api.base + '/follow', {id: userId});
+            return $http.post(api.base + '/follow', {id: userId}).error(function() {
+                showErrorModal('Could not follow user.');
+            });
         },
 
         unfollowUser: function(userId){
-            return $http.delete(api.base + '/follow/' + userId);
+            return $http.delete(api.base + '/follow/' + userId).error(function() {
+                showErrorModal('Could not unfollow user.');
+            });
         },
 
         deleteTrackFromPlayList:function(playlistId, trackId){
-            return $http.delete(api.base + '/playlists/' + playlistId + '/tracks/' + trackId);
+            return $http.delete(api.base + '/playlists/' + playlistId + '/tracks/' + trackId).error(function() {
+                showErrorModal('Could not delete track from playlist.');
+            });
         },
 
         createPlaylist: function(playlistName, email) {
-            return $http.post(api.base + '/playlists', {name: playlistName, owner: email});
+            return $http.post(api.base + '/playlists', {name: playlistName, owner: email}).error(function() {
+                showErrorModal('Could not create the playlist.');
+            });
         },
 
         deletePlaylist: function(id) {
-            return $http.delete(api.base + '/playlists/' + id);
+            return $http.delete(api.base + '/playlists/' + id).error(function() {
+                showErrorModal('Could not delete the playlist.');
+            });
         },
 
         login: function(email, password) {
@@ -65,7 +102,9 @@ services.factory('APIService', function($http) {
                 extendedTrack.audioObject = null;
                 extendedTracks.push(extendedTrack);
             }
-            return $http.put(api.base + '/playlists/' + playlistId, {name: playlistName, tracks: extendedTracks});
+            return $http.put(api.base + '/playlists/' + playlistId, {name: playlistName, tracks: extendedTracks}).error(function() {
+                showErrorModal('Could not update the playlist');
+            });
         },
 
         logout: function() {
@@ -78,10 +117,14 @@ services.factory('APIService', function($http) {
 
         search: function(queryString, option){
             if(option == 'all'){
-                return $http.get(api.base + '/search?q=' + queryString +'&limit=20');
+                return $http.get(api.base + '/search?q=' + queryString +'&limit=20').error(function() {
+                    showErrorModal('Could not complete search.');
+                });
             }
             else{
-                return $http.get(api.base +'/search/' + option + '?q=' + queryString);
+                return $http.get(api.base +'/search/' + option + '?q=' + queryString).error(function() {
+                    showErrorModal('Could not complete search.');
+                });
             }
         }
     }
@@ -115,7 +158,9 @@ services.service('AuthenticationService', function($cookieStore, $rootScope) {
     };
 
     this.getToken = function() {
-        return auth.user.token;
+        if(auth.user){
+            return auth.user.token;
+        }
     };
 
 
